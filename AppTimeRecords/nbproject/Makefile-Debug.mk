@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/AppManager.o \
 	${OBJECTDIR}/AppTimeRecords.o \
 	${OBJECTDIR}/Server.o \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/page/Main.o
 
 
 # C Compiler Flags
@@ -92,6 +93,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/page/Main.o: page/Main.cpp
+	${MKDIR} -p ${OBJECTDIR}/page
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/page/Main.o page/Main.cpp
 
 # Subprojects
 .build-subprojects:

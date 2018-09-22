@@ -25,6 +25,7 @@ public:
   void Start();
 private:
   Server m_server;
+  
 };
 
 #endif /* APPMANAGER_H */
