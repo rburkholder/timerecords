@@ -11,27 +11,37 @@
  * Created on September 22, 2018, 3:45 PM
  */
 
-#include <Wt/WPushButton.h>
 #include <Wt/WText.h>
+#include <Wt/WEvent.h>
+#include <Wt/WPushButton.h>
 
 #include "Main.h"
 
 namespace page {
 
-Main::Main( Wt::WContainerWidget* pcw ) { 
+Main::Main(  )
+: Wt::WContainerWidget(  )
+{ 
+  m_btnStart = addWidget( std::make_unique<Wt::WPushButton>("Start" ) );
   
-  Wt::WPushButton *btnStart 
-    = pcw->addWidget( std::make_unique<Wt::WPushButton>("Start" ) );
-  
-  Wt::WPushButton *btnStop
-    = pcw->addWidget( std::make_unique<Wt::WPushButton>("Stop" ) );
+  m_btnStop = addWidget( std::make_unique<Wt::WPushButton>("Stop" ) );
   
   //btnStart->setMargin(10, Wt::::Left | Wt::Right);
 
-  Wt::WText *out 
-    = pcw->addWidget( std::make_unique<Wt::WText>( "" ) );
+  m_textOut = addWidget( std::make_unique<Wt::WText>( "" ) );
+  
+  m_btnStart->clicked().connect( this, &Main::HandleBtnStart );
+  m_btnStop->clicked().connect( this, &Main::HandleBtnStop );
 }
 
 Main::~Main( ) { }
+
+void Main::HandleBtnStart() {
+  m_textOut->setText( "started" );
+}
+
+void Main::HandleBtnStop() {
+  m_textOut->setText( "stop" );
+}
 
 } // namespace page

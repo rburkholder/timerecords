@@ -8,9 +8,8 @@
  */
 
 #include <Wt/WContainerWidget.h>
+#include <Wt/WAnchor.h>
 #include <Wt/WText.h>
-
-#include "page/Main.h"
 
 #include "AppTimeRecords.h"
 
@@ -37,7 +36,10 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
   };
     
   namespace ph = std::placeholders;
-  TemplatePage( root(), std::bind( &AppTimeRecords::ShowMainMenu, this, ph::_1 ) );
+  TemplatePage( root(), [this](Wt::WContainerWidget* pcw){
+    //m_pMain = std::make_unique<page::Main>();
+    ShowMainMenu( pcw );
+  } );
   //TemplatePage( root(), callback() );
 }
 
@@ -86,10 +88,18 @@ void AppTimeRecords::UnRegisterPath( const std::string& sPath ) {
 }
 
 void AppTimeRecords::AddLink( Wt::WContainerWidget* pcw, const std::string& sClass, const std::string& sPath, const std::string& sAnchor ) {
-  //auto pContainer = new Wt::WContainerWidget( pcw );
-  //pContainer->setStyleClass( sClass );
-  //Wt::WLink link( Wt::WLink::InternalPath, sPath );
-  //Wt::WAnchor* pAnchor = new Wt::WAnchor( link, sAnchor, pContainer );
+  Wt::WContainerWidget* pContainer
+    = pcw->addWidget( std::make_unique<Wt::WContainerWidget>() );
+  
+  pContainer->setStyleClass( sClass );
+  
+  // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WAnchor.html
+  Wt::WLink link( Wt::LinkType::InternalPath, sPath );
+  
+  Wt::WAnchor* pAnchor
+    = pContainer->addWidget( std::make_unique<Wt::WAnchor>( link, sAnchor ) );
+  
+  // WApplication::instance()->internalPathChanged().connect(this, &DocsListWidget::onInternalPathChange);
 }
 
 void AppTimeRecords::ShowMainMenu( Wt::WContainerWidget* pcw ) {
@@ -129,7 +139,7 @@ void AppTimeRecords::ShowMainMenu( Wt::WContainerWidget* pcw ) {
   //pBtn->clicked().connect(this, &AppNodeStar::HandleShowAddresses );
   //pcw->addWidget( pBtn );
   
-  page::Main main( pcw );
+  pcw->addWidget( std::make_unique<page::Main>() );
   
 }
 

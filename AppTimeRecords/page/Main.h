@@ -18,12 +18,18 @@
 
 namespace page {
 
-class Main {
+class Main: public Wt::WContainerWidget {
 public:
-  Main( Wt::WContainerWidget* );
+  Main( );  // will probably need database connection here
   virtual ~Main( );
 private:
-
+  
+  Wt::WPushButton *m_btnStart;
+  Wt::WPushButton *m_btnStop;
+  Wt::WText *m_textOut; 
+  
+  void HandleBtnStart();
+  void HandleBtnStop();
 };
 
 } // namespace page
