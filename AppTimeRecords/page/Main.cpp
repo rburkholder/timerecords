@@ -11,11 +11,16 @@
  * Created on September 22, 2018, 3:45 PM
  */
 
+#include <chrono>
+
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WComboBox.h>
+#include <Wt/WTimer.h>
+#include <Wt/WDateTime.h>
+#include <Wt/WLocalDateTime.h>
 
 #include "Main.h"
 
@@ -24,6 +29,11 @@ namespace page {
 Main::Main(  )
 : Wt::WContainerWidget(  )
 { 
+  
+  m_textDateTimeCurrent = addWidget( std::make_unique<Wt::WText>() );
+  m_textDateTimeCurrent->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
+
+  addWidget( std::make_unique<Wt::WBreak>() );
   
   m_btnStart = addWidget( std::make_unique<Wt::WPushButton>("Start" ) );
   m_btnStart->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
@@ -73,6 +83,16 @@ Main::Main(  )
   addWidget( std::make_unique<Wt::WBreak>() );
   
   m_textResult = addWidget( std::make_unique<Wt::WText>() );
+  
+  auto timer = addChild(std::make_unique<Wt::WTimer>());
+  timer->setInterval( std::chrono::seconds( 59 ) );
+  timer->timeout().connect(this, &Main::HandleTimer );
+  timer->start();
+  
+  //m_locale.setDateTimeFormat( "yyyy-MM-dd HH:mm" );
+  
+  // gratuitus call
+  HandleTimer();
 }
 
 Main::~Main( ) { }
@@ -97,6 +117,13 @@ void Main::HandleBtnNext() {
   // validate existence of text
   //m_btnStart->setEnabled( true );
   //m_btnStop->setEnabled( false );
+}
+
+void Main::HandleTimer() {
+  //Wt::WDateTime now;
+  Wt::WLocalDateTime now;
+  now = Wt::WLocalDateTime::currentServerDateTime();
+  m_textDateTimeCurrent->setText( now.toString( "yyyy-MM-dd HH:mm" ) );
 }
 
 } // namespace page

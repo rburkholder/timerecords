@@ -24,6 +24,7 @@ public:
   virtual ~Main( );
 private:
   
+  Wt::WText* m_textDateTimeCurrent; 
   Wt::WPushButton* m_btnStart;
   Wt::WPushButton* m_btnStop;
   Wt::WPushButton* m_btnNext;
@@ -34,9 +35,13 @@ private:
   Wt::WLineEdit* m_lineDescription;
   Wt::WText* m_textResult;
   
+  Wt::WLocale m_locale;
+  
   void HandleBtnStart();
   void HandleBtnStop();
   void HandleBtnNext();
+  
+  void HandleTimer();
 };
 
 } // namespace page
