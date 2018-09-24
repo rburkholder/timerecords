@@ -43,13 +43,12 @@ AppManager::~AppManager( ) { }
 void AppManager::Start() {
   
   try {
-    
-    //InitializeTables( pool );
-    
-    //PopulateDatabase( pool );  // turn on when new file available, but convert to gui import function at some point
-    
-    //UserAuth::configureAuth();
 
+    //InitializeTables( pool );
+
+    //PopulateDatabase( pool );  // turn on when new file available, but convert to gui import function at some point
+
+    //UserAuth::configureAuth();
 
     if (m_server.start()) {
       Wt::WServer::waitForShutdown();
@@ -62,5 +61,5 @@ void AppManager::Start() {
   catch (std::exception &e) {
     std::cerr << "exception: " << e.what() << std::endl;
   }
-  
+
 }

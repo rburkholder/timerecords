@@ -15,6 +15,8 @@
 
 #include "AppTimeRecords.h"
 
+// https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WApplication.html
+
 AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
 : Wt::WApplication( env ), 
   m_pServer( nullptr )

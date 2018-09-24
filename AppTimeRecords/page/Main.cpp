@@ -13,13 +13,13 @@
 
 #include <chrono>
 
+#include <Wt/WLabel.h>
 #include <Wt/WText.h>
 #include <Wt/WBreak.h>
 #include <Wt/WLineEdit.h>
 #include <Wt/WPushButton.h>
 #include <Wt/WComboBox.h>
 #include <Wt/WTimer.h>
-#include <Wt/WDateTime.h>
 #include <Wt/WLocalDateTime.h>
 
 #include "Main.h"
@@ -52,19 +52,27 @@ Main::Main(  )
 
   addWidget( std::make_unique<Wt::WBreak>() );
   
+  Wt::WLabel* labelStart = addWidget(std::make_unique<Wt::WLabel>("Start: "));
+  labelStart->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
+  
   m_textDateTimeStart = addWidget( std::make_unique<Wt::WText>() );
   m_textDateTimeStart->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_textDateTimeStart->setText( "date time start" );
+  //m_textDateTimeStart->setText( "date time start" );
   //m_textDateTimeStart->setMinimumSize( m_textDateTimeStart->maximumHeight(), 60 );
+  
+  Wt::WLabel* labelStop = addWidget(std::make_unique<Wt::WLabel>("Stop: "));
+  labelStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   
   m_textDateTimeStop = addWidget( std::make_unique<Wt::WText>() );
   m_textDateTimeStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_textDateTimeStop->setText( "date time stop" );
+  //m_textDateTimeStop->setText( "date time stop" );
   //m_textDateTimeStop->setMinimumSize( m_textDateTimeStop->maximumHeight(), 60 );
   
   m_textDuration = addWidget( std::make_unique<Wt::WText>() );
   m_textDuration->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_textDuration->setMinimumSize( m_textDuration->minimumHeight(), 60 );
+  
+  addWidget( std::make_unique<Wt::WBreak>() );
   
   m_cbAccount = addWidget( std::make_unique<Wt::WComboBox>() );
   m_cbAccount->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
@@ -75,10 +83,10 @@ Main::Main(  )
   m_cbAccount->addItem( "tradeframe" );
   m_cbAccount->addItem( "timerecords" );
   
-  m_lineDescription = addWidget( std::make_unique<Wt::WLineEdit>() );
-  m_lineDescription->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_lineDescription->setMaxLength( 400 );
-  m_lineDescription->setTextSize( 80 );
+  m_lineDescriptionShort = addWidget( std::make_unique<Wt::WLineEdit>() );
+  m_lineDescriptionShort->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
+  m_lineDescriptionShort->setMaxLength( 400 );
+  m_lineDescriptionShort->setTextSize( 80 );
   
   addWidget( std::make_unique<Wt::WBreak>() );
   
@@ -89,23 +97,25 @@ Main::Main(  )
   timer->timeout().connect(this, &Main::HandleTimer );
   timer->start();
   
-  //m_locale.setDateTimeFormat( "yyyy-MM-dd HH:mm" );
-  
-  // gratuitus call
+  // gratuitus call for init
   HandleTimer();
 }
 
 Main::~Main( ) { }
 
 void Main::HandleBtnStart() {
-  m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescription->text() );
+  m_dtStart = Wt::WDateTime::currentDateTime();
+  m_textDateTimeStart->setText( m_dtStart.toString() );
+  m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescriptionShort->text() );
   m_btnStart->setEnabled( false );
   m_btnStop->setEnabled( true );
   m_btnNext->setEnabled( true );
 }
 
 void Main::HandleBtnStop() {
-  m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescription->text() );
+  m_dtStop = Wt::WDateTime::currentDateTime();
+  m_textDateTimeStop->setText( m_dtStop.toString() );
+  m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescriptionShort->text() );
   m_btnStart->setEnabled( true );
   m_btnStop->setEnabled( false );
   m_btnNext->setEnabled( false );
@@ -113,14 +123,21 @@ void Main::HandleBtnStop() {
 }
 
 void Main::HandleBtnNext() {
-  m_textResult->setText( "close & started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescription->text() );
+  // close out one record
+  m_dtStop = Wt::WDateTime::currentDateTime();
+  m_textDateTimeStop->setText( m_dtStop.toString() );
+  // start next record
+  m_dtStart = Wt::WDateTime::currentDateTime();
+  m_textDateTimeStart->setText( m_dtStart.toString() );
+  m_textResult->setText( "close & started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescriptionShort->text() );
+  m_textDateTimeStop->setText( "" );
+  // show results
   // validate existence of text
   //m_btnStart->setEnabled( true );
   //m_btnStop->setEnabled( false );
 }
 
 void Main::HandleTimer() {
-  //Wt::WDateTime now;
   Wt::WLocalDateTime now;
   now = Wt::WLocalDateTime::currentServerDateTime();
   m_textDateTimeCurrent->setText( now.toString( "yyyy-MM-dd HH:mm" ) );

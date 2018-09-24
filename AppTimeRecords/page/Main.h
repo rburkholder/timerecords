@@ -14,6 +14,7 @@
 #ifndef START_H
 #define START_H
 
+#include <Wt/WDateTime.h>
 #include <Wt/WContainerWidget.h>
 
 namespace page {
@@ -24,6 +25,9 @@ public:
   virtual ~Main( );
 private:
   
+  Wt::WDateTime m_dtStart;
+  Wt::WDateTime m_dtStop;
+  
   Wt::WText* m_textDateTimeCurrent; 
   Wt::WPushButton* m_btnStart;
   Wt::WPushButton* m_btnStop;
@@ -32,10 +36,9 @@ private:
   Wt::WText* m_textDateTimeStop;
   Wt::WText* m_textDuration;
   Wt::WComboBox* m_cbAccount;
-  Wt::WLineEdit* m_lineDescription;
+  Wt::WLineEdit* m_lineDescriptionShort;
+  Wt::WLineEdit* m_lineDescriptionLong;
   Wt::WText* m_textResult;
-  
-  Wt::WLocale m_locale;
   
   void HandleBtnStart();
   void HandleBtnStop();

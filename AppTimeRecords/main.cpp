@@ -22,6 +22,9 @@
  */
 
 // http://www.webtoolkit.eu/wt/doc/reference/html/InstallationUnix.html
+// https://www.webtoolkit.eu/wt/doc/reference/html/overview.html
+
+// cp -r ../libs-build/wt/resources web/
 
 int main( int argc, char** argv ) {
   
