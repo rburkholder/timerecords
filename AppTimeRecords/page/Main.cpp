@@ -38,17 +38,48 @@ Main::Main(  )
   m_btnStart = addWidget( std::make_unique<Wt::WPushButton>("Start" ) );
   m_btnStart->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_btnStart->setEnabled( true );
-  m_btnStart->clicked().connect( this, &Main::HandleBtnStart );
+  //m_btnStart->clicked().connect( this, &Main::HandleBtnStart );
+  m_btnStart->clicked().connect( [this] {
+    m_dtStart = Wt::WDateTime::currentDateTime();
+    m_textDateTimeStart->setText( m_dtStart.toString() );
+    m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingLine->text() );
+    m_btnStart->setEnabled( false );
+    m_btnStop->setEnabled( true );
+    m_btnNext->setEnabled( true );
+  } );
   
   m_btnStop = addWidget( std::make_unique<Wt::WPushButton>("Stop" ) );
   m_btnStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_btnStop->setEnabled( false );
-  m_btnStop->clicked().connect( this, &Main::HandleBtnStop );
+  //m_btnStop->clicked().connect( this, &Main::HandleBtnStop );
+  m_btnStop->clicked().connect( [this] {
+    m_dtStop = Wt::WDateTime::currentDateTime();
+    m_textDateTimeStop->setText( m_dtStop.toString() );
+    m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingLine->text() );
+    m_btnStart->setEnabled( true );
+    m_btnStop->setEnabled( false );
+    m_btnNext->setEnabled( false );
+    // validate existence of text
+  } );
 
   m_btnNext = addWidget( std::make_unique<Wt::WPushButton>("Next" ) );
   m_btnNext->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_btnNext->setEnabled( false );
-  m_btnNext->clicked().connect( this, &Main::HandleBtnNext );
+  //m_btnNext->clicked().connect( this, &Main::HandleBtnNext );
+  m_btnNext->clicked().connect( [this] {
+    // close out one record
+    m_dtStop = Wt::WDateTime::currentDateTime();
+    m_textDateTimeStop->setText( m_dtStop.toString() );
+    // start next record
+    m_dtStart = Wt::WDateTime::currentDateTime();
+    m_textDateTimeStart->setText( m_dtStart.toString() );
+    m_textResult->setText( "close & started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingLine->text() );
+    m_textDateTimeStop->setText( "" );
+    // show results
+    // validate existence of text
+    //m_btnStart->setEnabled( true );
+    //m_btnStop->setEnabled( false );
+  } );
 
   addWidget( std::make_unique<Wt::WBreak>() );
   
@@ -83,10 +114,10 @@ Main::Main(  )
   m_cbAccount->addItem( "tradeframe" );
   m_cbAccount->addItem( "timerecords" );
   
-  m_lineDescriptionShort = addWidget( std::make_unique<Wt::WLineEdit>() );
-  m_lineDescriptionShort->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_lineDescriptionShort->setMaxLength( 400 );
-  m_lineDescriptionShort->setTextSize( 80 );
+  m_lineBillingLine = addWidget( std::make_unique<Wt::WLineEdit>() );
+  m_lineBillingLine->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
+  m_lineBillingLine->setMaxLength( 400 );
+  m_lineBillingLine->setTextSize( 80 );
   
   addWidget( std::make_unique<Wt::WBreak>() );
   
@@ -103,41 +134,7 @@ Main::Main(  )
 
 Main::~Main( ) { }
 
-void Main::HandleBtnStart() {
-  m_dtStart = Wt::WDateTime::currentDateTime();
-  m_textDateTimeStart->setText( m_dtStart.toString() );
-  m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescriptionShort->text() );
-  m_btnStart->setEnabled( false );
-  m_btnStop->setEnabled( true );
-  m_btnNext->setEnabled( true );
-}
-
-void Main::HandleBtnStop() {
-  m_dtStop = Wt::WDateTime::currentDateTime();
-  m_textDateTimeStop->setText( m_dtStop.toString() );
-  m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescriptionShort->text() );
-  m_btnStart->setEnabled( true );
-  m_btnStop->setEnabled( false );
-  m_btnNext->setEnabled( false );
-  // validate existence of text
-}
-
-void Main::HandleBtnNext() {
-  // close out one record
-  m_dtStop = Wt::WDateTime::currentDateTime();
-  m_textDateTimeStop->setText( m_dtStop.toString() );
-  // start next record
-  m_dtStart = Wt::WDateTime::currentDateTime();
-  m_textDateTimeStart->setText( m_dtStart.toString() );
-  m_textResult->setText( "close & started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineDescriptionShort->text() );
-  m_textDateTimeStop->setText( "" );
-  // show results
-  // validate existence of text
-  //m_btnStart->setEnabled( true );
-  //m_btnStop->setEnabled( false );
-}
-
-void Main::HandleTimer() {
+void Main::HandleTimer() {  // called from two places, so not lambda material
   Wt::WLocalDateTime now;
   now = Wt::WLocalDateTime::currentServerDateTime();
   m_textDateTimeCurrent->setText( now.toString( "yyyy-MM-dd HH:mm" ) );

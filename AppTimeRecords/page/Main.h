@@ -36,13 +36,9 @@ private:
   Wt::WText* m_textDateTimeStop;
   Wt::WText* m_textDuration;
   Wt::WComboBox* m_cbAccount;
-  Wt::WLineEdit* m_lineDescriptionShort;
-  Wt::WLineEdit* m_lineDescriptionLong;
+  Wt::WLineEdit* m_lineBillingLine;
+  Wt::WLineEdit* m_lineDetails;
   Wt::WText* m_textResult;
-  
-  void HandleBtnStart();
-  void HandleBtnStop();
-  void HandleBtnNext();
   
   void HandleTimer();
 };
