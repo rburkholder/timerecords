@@ -11,7 +11,7 @@
 //#include <Wt/WLogger.h>
 //#include <Wt/WContainerWidget.h>
 #include <Wt/WAnchor.h>
-//#include <Wt/WText.h>
+#include <Wt/WText.h>
 
 #include "AppTimeRecords.h"
 
@@ -144,7 +144,7 @@ void AppTimeRecords::ShowMainMenu( Wt::WContainerWidget* pcw ) {
   //Wt::WPushButton* pBtn = new Wt::WPushButton( "Show Addresses" );
   //pBtn->clicked().connect(this, &AppNodeStar::HandleShowAddresses );
   //pcw->addWidget( pBtn );
-  
+
   pcw->addWidget( std::make_unique<page::Main>() );
   
 }
@@ -166,6 +166,10 @@ void AppTimeRecords::TemplatePage(Wt::WContainerWidget* pcw, fTemplate_t f) {
   
   std::string sTitle( "Time Records" );
   setTitle( sTitle );
+  
+  auto title = pcw->addWidget( std::make_unique<Wt::WText>( "Time Records" ) );
+  
+  pcw->addWidget( std::make_unique<Wt::WBreak>() );
   
   //auto pTitle( new Wt::WText( sTitle ) );
   //pTitle->setStyleClass( "MainTitle" );

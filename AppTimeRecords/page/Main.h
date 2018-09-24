@@ -32,11 +32,12 @@ private:
   Wt::WPushButton* m_btnStart;
   Wt::WPushButton* m_btnStop;
   Wt::WPushButton* m_btnNext;
+  Wt::WPushButton* m_btnCancel;
   Wt::WText* m_textDateTimeStart; 
   Wt::WText* m_textDateTimeStop;
   Wt::WText* m_textDuration;
   Wt::WComboBox* m_cbAccount;
-  Wt::WLineEdit* m_lineBillingLine;
+  Wt::WLineEdit* m_lineBillingText;
   Wt::WLineEdit* m_lineDetails;
   Wt::WText* m_textResult;
   
