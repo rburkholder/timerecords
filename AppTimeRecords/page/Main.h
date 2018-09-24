@@ -24,12 +24,19 @@ public:
   virtual ~Main( );
 private:
   
-  Wt::WPushButton *m_btnStart;
-  Wt::WPushButton *m_btnStop;
-  Wt::WText *m_textOut; 
+  Wt::WPushButton* m_btnStart;
+  Wt::WPushButton* m_btnStop;
+  Wt::WPushButton* m_btnNext;
+  Wt::WText* m_textDateTimeStart; 
+  Wt::WText* m_textDateTimeStop;
+  Wt::WText* m_textDuration;
+  Wt::WComboBox* m_cbAccount;
+  Wt::WLineEdit* m_lineDescription;
+  Wt::WText* m_textResult;
   
   void HandleBtnStart();
   void HandleBtnStop();
+  void HandleBtnNext();
 };
 
 } // namespace page

@@ -7,9 +7,11 @@
  * Created on September 22, 2018, 12:40 PM
  */
 
-#include <Wt/WContainerWidget.h>
+//#include <Wt/WApplication.h>
+//#include <Wt/WLogger.h>
+//#include <Wt/WContainerWidget.h>
 #include <Wt/WAnchor.h>
-#include <Wt/WText.h>
+//#include <Wt/WText.h>
 
 #include "AppTimeRecords.h"
 
@@ -46,31 +48,33 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
 AppTimeRecords::~AppTimeRecords( ) { }
 
 void AppTimeRecords::initialize() {
-  std::cout << "AppTimeRecords::initialize()" << std::endl;
+  Wt::WApplication::log( "info" ) << "AppTimeRecords::initialize()";
 }
 
 void AppTimeRecords::finalize() {
-  std::cout << "AppTimeRecords::finalize()" << std::endl;
+  Wt::WApplication::log( "info" ) << "AppTimeRecords::finalize()";
 }
 
 void AppTimeRecords::HandleInternalPathChanged( const std::string& sPath ) {
   root()->clear();
-  std::cout << "HandleInternalPathChanged: " << sPath << " ";
+  std::string sMessage;
+  sMessage += "HandleInternalPathChanged: ";
+  sMessage += sPath;
   mapInternalPathChanged_t::const_iterator iter = m_mapInternalPathChanged.find( sPath );
   if ( m_mapInternalPathChanged.end() != iter ) {
-    std::cout << "iter" << std::endl;
+    sMessage += "iter";
     iter->second( root() );
   }
   else {
     // default home page, or error page, and register a default page
-    std::cout << "root" << std::endl;
+    sMessage += "root";
     Home( root() );
   }
-  std::cout << "end HandleInternalPathChanged" << std::endl;
+  Wt::WApplication::log( "info" ) << sMessage;
 }
 
 void AppTimeRecords::HandleInternalPathInvalid( const std::string& s ) {
-  std::cout << "*** HandleInternalPathInvalid: " << s << std::endl;
+  Wt::WApplication::log( "warn" ) << "*** HandleInternalPathInvalid: " << s;
 }
   
 void AppTimeRecords::RegisterPath( const std::string& sPath, const slotInternalPathChanged_t& slot ) {
@@ -151,7 +155,6 @@ void AppTimeRecords::HomeRoot( Wt::WContainerWidget* pcw ) {
 }
 
 void AppTimeRecords::Home( Wt::WContainerWidget* pcw ) {
-  std::cout << "main home" << std::endl;
   
   namespace ph = std::placeholders;
   TemplatePage( pcw, std::bind( &AppTimeRecords::ShowMainMenu, this, ph::_1 ) );
