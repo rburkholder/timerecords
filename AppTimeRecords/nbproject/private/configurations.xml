@@ -31,9 +31,11 @@
           <runcommandpicklistitem>"${OUTPUT_PATH}" --docroot="web;/favicon.ico,/resources,/style" --http-address 0.0.0.0 --http-port 8080</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" --docroot="./web;/favicon.ico,/resources,/style" --http-address 0.0.0.0 --http-port 8080</runcommandpicklistitem>
           <runcommandpicklistitem>"${OUTPUT_PATH}" --docroot=".;/favicon.ico,/resources" --http-address 0.0.0.0 --http-port 8080</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" --docroot=".;/favicon.ico,/resources,/style" --http-address 0.0.0.0 --http-port 8080</runcommandpicklistitem>
+          <runcommandpicklistitem>"${OUTPUT_PATH}" --docroot="web;/favicon.ico,/resources,/style" --http-address 0.0.0.0 --http-port 8080 --config "etc/wt_config.xml"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}" --docroot=".;/favicon.ico,/resources" --http-address 0.0.0.0 --http-port 8080</runcommand>
-        <rundir>/home/rpb/data/projects/timerecords/web</rundir>
+        <runcommand>"${OUTPUT_PATH}" --docroot="web;/favicon.ico,/resources,/style" --http-address 0.0.0.0 --http-port 8080 --config "etc/wt_config.xml"</runcommand>
+        <rundir>/home/rpb/data/projects/timerecords/x64</rundir>
         <buildfirst>true</buildfirst>
         <terminal-type>0</terminal-type>
         <remove-instrumentation>0</remove-instrumentation>
