@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/AppTimeRecords.o \
 	${OBJECTDIR}/Server.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/page/Main.o
 
 
@@ -93,6 +94,11 @@ ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+
+${OBJECTDIR}/model/Task.o: model/Task.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Task.o model/Task.cpp
 
 ${OBJECTDIR}/page/Main.o: page/Main.cpp
 	${MKDIR} -p ${OBJECTDIR}/page

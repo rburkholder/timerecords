@@ -45,10 +45,10 @@ int main( int argc, char** argv ) {
   
   if ( bOk ) {
     
-    //pSqlConnection->setProperty( "show-queries", "true" );
+    pSqlConnection->setProperty( "show-queries", "true" );
     
     dbo::FixedSqlConnectionPool pool( std::move( pSqlConnection ), 4 );
-
+    
     AppManager manager( argc, argv, pool );
 
     manager.Start();

@@ -12,6 +12,9 @@
 //#include <Wt/WContainerWidget.h>
 #include <Wt/WAnchor.h>
 #include <Wt/WText.h>
+#include <Wt/Dbo/Session.h>
+
+#include "model/Task.h"
 
 #include "AppTimeRecords.h"
 
@@ -22,6 +25,10 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
   m_pServer( nullptr )
 { 
   m_pServer = dynamic_cast<Server*>( env.server() );
+  
+  m_session.setConnectionPool( m_pServer->GetConnectionPool() );
+  
+  m_session.mapClass<model::Task>( "task" );
   
   useStyleSheet("style/tr.css");
   
@@ -145,7 +152,7 @@ void AppTimeRecords::ShowMainMenu( Wt::WContainerWidget* pcw ) {
   //pBtn->clicked().connect(this, &AppNodeStar::HandleShowAddresses );
   //pcw->addWidget( pBtn );
 
-  pcw->addWidget( std::make_unique<page::Main>() );
+  pcw->addWidget( std::make_unique<page::Main>( m_session ) );
   
 }
 

@@ -11,6 +11,7 @@
 #define APPMANAGER_H
 
 #include <Wt/Dbo/FixedSqlConnectionPool.h>
+#include <Wt/Dbo/SqlConnection.h>
 
 #include "Server.h"
 
@@ -24,7 +25,12 @@ public:
   virtual ~AppManager( );
   void Start();
 private:
+  
+  typedef std::unique_ptr<dbo::SqlConnection> pdbconn_t;
+  
   Server m_server;
+  
+  bool InitializeTables( dbo::FixedSqlConnectionPool& pool );
   
 };
 

@@ -19,6 +19,9 @@
 #include <Wt/WLocalDateTime.h>
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WVBoxLayout.h>
+#include <Wt/Dbo/Session.h>
+
+#include "../model/Task.h"
 
 #include "Main.h"
 
@@ -26,8 +29,8 @@ namespace page {
 
 // need to modify with state machine to handle start, stop, cancel (maybe pause)
 
-Main::Main(  )
-: Wt::WContainerWidget(  ), m_state( EState::Init )
+Main::Main( dbo::Session& session )
+: Wt::WContainerWidget(  ), m_state( EState::Init ), m_session( session )
 { 
   
   m_textDateTimeCurrent = addWidget( std::make_unique<Wt::WText>() );
@@ -64,8 +67,8 @@ Main::Main(  )
   //Wt::WLabel* labelStop = addWidget(std::make_unique<Wt::WLabel>("Stop: "));
   //labelStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   
-  m_textDateTimeStop = addWidget( std::make_unique<Wt::WText>() );
-  m_textDateTimeStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
+  m_textDateTimeEnd = addWidget( std::make_unique<Wt::WText>() );
+  m_textDateTimeEnd->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   //m_textDateTimeStop->setText( "date time stop" );
   //m_textDateTimeStop->setMinimumSize( m_textDateTimeStop->maximumHeight(), 60 );
   
@@ -177,10 +180,10 @@ void Main::TransitionTo( EState state ) {
           m_btnNext->setEnabled( true );
           m_btnCancel->setEnabled( true );
 
-          m_dtStart = Wt::WDateTime::currentDateTime();
+          m_dtStart = Wt::WLocalDateTime::currentDateTime();
           m_textDateTimeStart->setText( m_dtStart.toString() );
-          m_textDateTimeStop->setText( "" );
-          m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
+          m_textDateTimeEnd->setText( "" );
+          m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeEnd->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
 
           m_state = EState::InTask;
           break;
@@ -202,13 +205,14 @@ void Main::TransitionTo( EState state ) {
             m_btnNext->setEnabled( false );
             m_btnCancel->setEnabled( false );
 
-            m_dtStop = Wt::WDateTime::currentDateTime();
-            m_textDateTimeStop->setText( m_dtStop.toString() );
-            m_textResult->setText( "completed: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
+            m_dtEnd = Wt::WLocalDateTime::currentDateTime();
+            m_textDateTimeEnd->setText( m_dtEnd.toString() );
+
+            PersistTask();
+            
+            m_textResult->setText( "completed: " + m_textDateTimeStart->text() + " " + m_textDateTimeEnd->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
             m_lineBillingText->setText( "" );
             m_lineDetails->setText( "" );
-
-            // TODO: perform persistence here
             
             // finalize with transition
             m_state = EState::Transit;
@@ -217,7 +221,7 @@ void Main::TransitionTo( EState state ) {
           break;
         case EState::Cancel:
           m_textDateTimeStart->setText( "" );
-          m_textDateTimeStop->setText( "" );
+          m_textDateTimeEnd->setText( "" );
           m_textResult->setText( "cancelled" );
           // skip any persistence
           // finalize with transition
@@ -253,6 +257,24 @@ void Main::HandleTimer() {  // called from two places, so not lambda material
   Wt::WLocalDateTime now;
   now = Wt::WLocalDateTime::currentServerDateTime();
   m_textDateTimeCurrent->setText( now.toString( "yyyy-MM-dd HH:mm" ) );
+}
+
+void Main::PersistTask() {
+  
+  namespace dbo = Wt::Dbo;
+  
+  dbo::Transaction transaction( m_session );
+  
+  std::unique_ptr<model::Task> task( new model::Task );
+  task->m_sTaskType = m_cbAccount->currentText();
+  task->m_dtStart = m_dtStart.toUTC();
+  task->m_dtEnd = m_dtEnd.toUTC();
+  task->m_sBillingText = m_lineBillingText->text();
+  task->m_sTaskText = m_lineDetails->text();
+  
+  dbo::ptr<model::Task> pdboTask = m_session.add( std::move( task ) );
+  transaction.commit();
+  
 }
 
 } // namespace page

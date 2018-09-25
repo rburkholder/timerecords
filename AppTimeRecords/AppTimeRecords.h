@@ -23,7 +23,7 @@
 
 #include "page/Main.h"
 
-namespace dbo = Wt::Dbo;
+//namespace dbo = Wt::Dbo;
 
 class AppTimeRecords: public Wt::WApplication {
 public:
@@ -48,7 +48,7 @@ private:
   mapInternalPathChanged_t m_mapInternalPathChanged;  
   
   Server* m_pServer; // object managed by wt
-  //dbo::Session m_session;
+  dbo::Session m_session;
   
   //std::unique_ptr<page::Main> m_pMain;
   

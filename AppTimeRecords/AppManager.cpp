@@ -7,6 +7,8 @@
  * Created on September 22, 2018, 11:52 AM
  */
 
+#include "model/Task.h"
+
 #include "AppTimeRecords.h"
 
 #include "AppManager.h"
@@ -40,11 +42,36 @@ AppManager::AppManager( int argc, char** argv, dbo::FixedSqlConnectionPool& pool
 
 AppManager::~AppManager( ) { }
 
+bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
+  
+  bool bResult( true );
+  
+  namespace dbo = Wt::Dbo;
+
+  dbo::Session session;
+
+  session.setConnectionPool( pool );
+
+  // will need to perform some sort of version control at some point (version control table?)
+  
+  session.mapClass<model::Task>( "task" );
+  
+  try {
+    session.createTables();
+  }
+  catch ( Wt::Dbo::Exception& exception ) {
+    m_server.log( "info" ) << "createTables: " << exception.what();
+    bResult = false;
+  }
+
+  return bResult;
+}
+
 void AppManager::Start() {
   
   try {
 
-    //InitializeTables( pool );
+    InitializeTables( m_server.GetConnectionPool() );
 
     //PopulateDatabase( pool );  // turn on when new file available, but convert to gui import function at some point
 
