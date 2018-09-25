@@ -28,8 +28,10 @@
 
 namespace page {
 
+// need to modify with state machine to handle start, stop, cancel (maybe pause)
+
 Main::Main(  )
-: Wt::WContainerWidget(  )
+: Wt::WContainerWidget(  ), m_state( EState::Init )
 { 
   
   m_textDateTimeCurrent = addWidget( std::make_unique<Wt::WText>() );
@@ -41,17 +43,8 @@ Main::Main(  )
   
   m_btnStart = addWidget( std::make_unique<Wt::WPushButton>("Start" ) );
   m_btnStart->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_btnStart->setEnabled( true );
-  //m_btnStart->clicked().connect( this, &Main::HandleBtnStart );
   m_btnStart->clicked().connect( [this] {
-    m_dtStart = Wt::WDateTime::currentDateTime();
-    m_textDateTimeStart->setText( m_dtStart.toString() );
-    m_textDateTimeStop->setText( "" );
-    m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
-    m_btnStart->setEnabled( false );
-    m_btnStop->setEnabled( true );
-    m_btnNext->setEnabled( true );
-    m_btnCancel->setEnabled( true );
+    TransitionTo( EState::InTask );
   } );
   
   //Wt::WLabel* labelStart = addWidget(std::make_unique<Wt::WLabel>("Start: "));
@@ -68,23 +61,8 @@ Main::Main(  )
   
   m_btnStop = addWidget( std::make_unique<Wt::WPushButton>("Stop" ) );
   m_btnStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_btnStop->setEnabled( false );
-  //m_btnStop->clicked().connect( this, &Main::HandleBtnStop );
   m_btnStop->clicked().connect( [this] {
-    if ( m_lineBillingText->text().empty() ) {
-      m_textResult->setText( "require some billing text" );
-    }
-    else {
-      m_dtStop = Wt::WDateTime::currentDateTime();
-      m_textDateTimeStop->setText( m_dtStop.toString() );
-      m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
-      m_btnStart->setEnabled( true );
-      m_btnStop->setEnabled( false );
-      m_btnCancel->setEnabled( false );
-      m_btnNext->setEnabled( false );
-      m_lineBillingText->setText( "" );
-      m_lineDetails->setText( "" );
-    }
+    TransitionTo( EState::Close );
   } );
 
   //Wt::WLabel* labelStop = addWidget(std::make_unique<Wt::WLabel>("Stop: "));
@@ -101,40 +79,25 @@ Main::Main(  )
   
   m_btnNext = addWidget( std::make_unique<Wt::WPushButton>("Next" ) );
   m_btnNext->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_btnNext->setEnabled( false );
-  //m_btnNext->clicked().connect( this, &Main::HandleBtnNext );
   m_btnNext->clicked().connect( [this] {
-    if ( m_lineBillingText->text().empty() ) {
-      m_textResult->setText( "require some billing text" );
+    TransitionTo( EState::Close );
+    if ( EState::Free == m_state ) {
+      TransitionTo( EState::InTask );
     }
     else {
-      // close out one record
-      m_dtStop = Wt::WDateTime::currentDateTime();
-      m_textDateTimeStop->setText( m_dtStop.toString() );
-      // start next record
-      m_dtStart = Wt::WDateTime::currentDateTime();
-      m_textDateTimeStart->setText( m_dtStart.toString() );
-      m_textResult->setText( "close & started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
-      m_textDateTimeStop->setText( "" );
-      m_lineBillingText->setText( "" );
-      m_lineDetails->setText( "" );
+      // prevented from performing state transition
     }
   } );
 
   addWidget( std::make_unique<Wt::WBreak>() );
   
+  // buton cancel
+  
   m_btnCancel = addWidget( std::make_unique<Wt::WPushButton>( "Cancel" ) );
   m_btnCancel->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_btnCancel->setEnabled( false );
   m_btnCancel->clicked().connect( [this] {
-    m_btnStart->setEnabled( true );
-    m_btnStop->setEnabled( false );
-    m_btnNext->setEnabled( false );
-    m_textDateTimeStart->setText( "" );
-    m_textDateTimeStop->setText( "" );
-    m_textResult->setText( "cancelled" );
+    TransitionTo( EState::Cancel );
   });
-  
   
   addWidget( std::make_unique<Wt::WBreak>() );
   
@@ -189,11 +152,106 @@ Main::Main(  )
   timer->timeout().connect(this, &Main::HandleTimer );
   timer->start();
   
+  TransitionTo( Free );
+  
   // gratuitus call for init
   HandleTimer();
 }
 
 Main::~Main( ) { }
+
+void Main::TransitionTo( EState state ) {
+  switch ( m_state ) {
+    case EState::Init:  // holding state for startup only
+      switch ( state ) {
+        case EState::Free:
+          m_state = EState::Transit;
+          TransitionTo( EState::Free );
+          break;
+        default: {
+            assert( 0 ); // Free is only allowed next state
+          }
+      }
+      break;
+    case EState::Free:  // holding state
+      switch ( state ) {
+        case EState::InTask:
+          m_btnStart->setEnabled( false );
+          m_btnStop->setEnabled( true );
+          m_btnNext->setEnabled( true );
+          m_btnCancel->setEnabled( true );
+
+          m_dtStart = Wt::WDateTime::currentDateTime();
+          m_textDateTimeStart->setText( m_dtStart.toString() );
+          m_textDateTimeStop->setText( "" );
+          m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
+
+          m_state = EState::InTask;
+          break;
+        default: {
+          assert( 0 ); // unhandled state
+        }
+      }
+      break;
+    case EState::InTask: // holding state
+      switch ( state ) {
+        case EState::Close:
+          if ( m_lineBillingText->text().empty() ) {
+            m_textResult->setText( "require some billing text" );
+          }
+          else {
+            // disable buttons during persistence portion
+            m_btnStart->setEnabled( false );
+            m_btnStop->setEnabled( false );
+            m_btnNext->setEnabled( false );
+            m_btnCancel->setEnabled( false );
+
+            m_dtStop = Wt::WDateTime::currentDateTime();
+            m_textDateTimeStop->setText( m_dtStop.toString() );
+            m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
+            m_lineBillingText->setText( "" );
+            m_lineDetails->setText( "" );
+
+            // TODO: perform persistence here
+            
+            // finalize with transition
+            m_state = EState::Transit;
+            TransitionTo( EState::Free );
+          }
+          break;
+        case EState::Cancel:
+          m_textDateTimeStart->setText( "" );
+          m_textDateTimeStop->setText( "" );
+          m_textResult->setText( "cancelled" );
+          // skip any persistence
+          // finalize with transition
+          m_state = EState::Transit;
+          TransitionTo( EState::Free );
+          break;
+        default: {
+          assert( 0 ); // unhandled state
+        }
+      }
+      break;
+    case EState::Transit:  // common pre-state init for internal state transitions
+      switch ( state ) {
+        case EState::Free:
+          m_btnStart->setEnabled( true );
+          m_btnStop->setEnabled( false );
+          m_btnNext->setEnabled( false );
+          m_btnCancel->setEnabled( false );
+          m_state = EState::Free;
+          break;
+        default: {
+          assert( 0 );  // not sure what other states arrive
+        }
+      }
+      break;
+    default: {
+      assert( 0 );  // no other holding states allowed
+      }
+  }
+}
 
 void Main::HandleTimer() {  // called from two places, so not lambda material
   Wt::WLocalDateTime now;

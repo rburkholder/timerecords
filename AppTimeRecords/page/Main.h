@@ -41,7 +41,11 @@ private:
   Wt::WLineEdit* m_lineDetails;
   Wt::WText* m_textResult;
   
+  enum EState { Init, Free, InTask, Close, Cancel, Transit };
+  EState m_state;
+  
   void HandleTimer();
+  void TransitionTo( EState );
 };
 
 } // namespace page
