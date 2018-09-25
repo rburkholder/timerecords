@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
- * File:   Start.h
- * Author: rpb
+ * File:      Main.h
+ * Author:    raymond@burkholder.net
+ * Copywrite: 2018 Raymond Burkholder
+ * License:   GPL3
  *
  * Created on September 22, 2018, 3:45 PM
  */
