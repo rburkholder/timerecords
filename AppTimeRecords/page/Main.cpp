@@ -41,7 +41,7 @@ Main::Main(  )
   
   // button start
   
-  m_btnStart = addWidget( std::make_unique<Wt::WPushButton>("Start" ) );
+  m_btnStart = addWidget( std::make_unique<Wt::WPushButton>("Start Task" ) );
   m_btnStart->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_btnStart->clicked().connect( [this] {
     TransitionTo( EState::InTask );
@@ -59,9 +59,9 @@ Main::Main(  )
   
   // button stop
   
-  m_btnStop = addWidget( std::make_unique<Wt::WPushButton>("Stop" ) );
-  m_btnStop->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
-  m_btnStop->clicked().connect( [this] {
+  m_btnComplete = addWidget( std::make_unique<Wt::WPushButton>("End Task" ) );
+  m_btnComplete->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
+  m_btnComplete->clicked().connect( [this] {
     TransitionTo( EState::Close );
   } );
 
@@ -77,7 +77,7 @@ Main::Main(  )
   
   // button next
   
-  m_btnNext = addWidget( std::make_unique<Wt::WPushButton>("Next" ) );
+  m_btnNext = addWidget( std::make_unique<Wt::WPushButton>("Next Task" ) );
   m_btnNext->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_btnNext->clicked().connect( [this] {
     TransitionTo( EState::Close );
@@ -93,7 +93,7 @@ Main::Main(  )
   
   // buton cancel
   
-  m_btnCancel = addWidget( std::make_unique<Wt::WPushButton>( "Cancel" ) );
+  m_btnCancel = addWidget( std::make_unique<Wt::WPushButton>( "Cancel Task" ) );
   m_btnCancel->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_btnCancel->clicked().connect( [this] {
     TransitionTo( EState::Cancel );
@@ -177,7 +177,7 @@ void Main::TransitionTo( EState state ) {
       switch ( state ) {
         case EState::InTask:
           m_btnStart->setEnabled( false );
-          m_btnStop->setEnabled( true );
+          m_btnComplete->setEnabled( true );
           m_btnNext->setEnabled( true );
           m_btnCancel->setEnabled( true );
 
@@ -202,13 +202,13 @@ void Main::TransitionTo( EState state ) {
           else {
             // disable buttons during persistence portion
             m_btnStart->setEnabled( false );
-            m_btnStop->setEnabled( false );
+            m_btnComplete->setEnabled( false );
             m_btnNext->setEnabled( false );
             m_btnCancel->setEnabled( false );
 
             m_dtStop = Wt::WDateTime::currentDateTime();
             m_textDateTimeStop->setText( m_dtStop.toString() );
-            m_textResult->setText( "stopped: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
+            m_textResult->setText( "completed: " + m_textDateTimeStart->text() + " " + m_textDateTimeStop->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
             m_lineBillingText->setText( "" );
             m_lineDetails->setText( "" );
 
@@ -237,7 +237,7 @@ void Main::TransitionTo( EState state ) {
       switch ( state ) {
         case EState::Free:
           m_btnStart->setEnabled( true );
-          m_btnStop->setEnabled( false );
+          m_btnComplete->setEnabled( false );
           m_btnNext->setEnabled( false );
           m_btnCancel->setEnabled( false );
           m_state = EState::Free;

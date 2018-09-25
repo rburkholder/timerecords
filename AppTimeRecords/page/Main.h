@@ -30,7 +30,7 @@ private:
   
   Wt::WText* m_textDateTimeCurrent; 
   Wt::WPushButton* m_btnStart;
-  Wt::WPushButton* m_btnStop;
+  Wt::WPushButton* m_btnComplete;
   Wt::WPushButton* m_btnNext;
   Wt::WPushButton* m_btnCancel;
   Wt::WText* m_textDateTimeStart; 
