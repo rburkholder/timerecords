@@ -27,8 +27,6 @@
 
 namespace page {
 
-// need to modify with state machine to handle start, stop, cancel (maybe pause)
-
 Main::Main( dbo::Session& session )
 : Wt::WContainerWidget(  ), m_state( EState::Init ), m_session( session )
 { 

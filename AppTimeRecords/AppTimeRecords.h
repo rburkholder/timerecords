@@ -23,8 +23,6 @@
 
 #include "page/Main.h"
 
-//namespace dbo = Wt::Dbo;
-
 class AppTimeRecords: public Wt::WApplication {
 public:
   
@@ -49,8 +47,6 @@ private:
   
   Server* m_pServer; // object managed by wt
   dbo::Session m_session;
-  
-  //std::unique_ptr<page::Main> m_pMain;
   
   void AddLink( Wt::WContainerWidget*, const std::string& sClass, const std::string& sPath, const std::string& sAnchor );
 

@@ -26,8 +26,6 @@ public:
   void Start();
 private:
   
-  typedef std::unique_ptr<dbo::SqlConnection> pdbconn_t;
-  
   Server m_server;
   
   bool InitializeTables( dbo::FixedSqlConnectionPool& pool );

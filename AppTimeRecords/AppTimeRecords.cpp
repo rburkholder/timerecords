@@ -38,8 +38,6 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
   namespace ph = std::placeholders;
   RegisterPath( "/", std::bind( &AppTimeRecords::HomeRoot, this, ph::_1 ) );
   
-  //m_session.setConnectionPool( m_pServer->GetConnectionPool() );
-
   struct callback {
     void operator()( Wt::WContainerWidget* pcw ) {
       
@@ -48,10 +46,8 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
     
   namespace ph = std::placeholders;
   TemplatePage( root(), [this](Wt::WContainerWidget* pcw){
-    //m_pMain = std::make_unique<page::Main>();
     ShowMainMenu( pcw );
   } );
-  //TemplatePage( root(), callback() );
 }
 
 AppTimeRecords::~AppTimeRecords( ) { }
@@ -147,10 +143,6 @@ void AppTimeRecords::ShowMainMenu( Wt::WContainerWidget* pcw ) {
     
   }
   */
-  // sample button code, but now implemented as a link
-  //Wt::WPushButton* pBtn = new Wt::WPushButton( "Show Addresses" );
-  //pBtn->clicked().connect(this, &AppNodeStar::HandleShowAddresses );
-  //pcw->addWidget( pBtn );
 
   pcw->addWidget( std::make_unique<page::Main>( m_session ) );
   
