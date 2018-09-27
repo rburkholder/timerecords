@@ -25,10 +25,19 @@
 
 #include "Main.h"
 
+namespace {
+  static const std::string sDateFormat( "yyyy-MM-dd" );
+  static const std::string sTimeFormat( "HH:mm:ss" );
+  static const std::string sDateTimeFormat( sDateFormat + "" + sTimeFormat );
+}
+
 namespace page {
 
 Main::Main( dbo::Session& session )
-: Wt::WContainerWidget(  ), m_state( EState::Init ), m_session( session )
+: Wt::WContainerWidget(  ), 
+  m_state( EState::Init ), 
+  m_session( session ),
+  m_time_zone_offset( 0 )
 { 
   
   m_textDateTimeCurrent = addWidget( std::make_unique<Wt::WText>() );
@@ -96,6 +105,14 @@ Main::Main( dbo::Session& session )
     TransitionTo( EState::Cancel );
   });
   
+  {
+    Wt::WLength width( 130 );
+    m_btnStart->setWidth( width );
+    m_btnComplete->setWidth( width );
+    m_btnNext->setWidth( width );
+    m_btnCancel->setWidth( width );
+  }
+  
   addWidget( std::make_unique<Wt::WBreak>() );
   
   m_textDuration = addWidget( std::make_unique<Wt::WText>() );
@@ -118,7 +135,7 @@ Main::Main( dbo::Session& session )
   m_cbAccount->addItem( "tradeframe" );
   m_cbAccount->addItem( "timerecords" );
   
-  auto filler = layoutLeft->addWidget( std::make_unique<Wt::WText>( " " ) );
+  m_textTimeInTask = layoutLeft->addWidget( std::make_unique<Wt::WText>( " " ) );
   
   //auto fieldsLeft = hl->addWidget( std::make_unique<Wt::WContainerWidget>() );
   
@@ -144,8 +161,11 @@ Main::Main( dbo::Session& session )
   
   m_textResult = addWidget( std::make_unique<Wt::WText>() );
   
+  Wt::WLocalDateTime dt = Wt::WLocalDateTime::currentDateTime();
+  m_time_zone_offset = dt.timeZoneOffset();
+  
   auto timer = addChild(std::make_unique<Wt::WTimer>());
-  timer->setInterval( std::chrono::seconds( 59 ) );
+  timer->setInterval( std::chrono::seconds( 1 ) );
   timer->timeout().connect(this, &Main::HandleTimer );
   timer->start();
   
@@ -178,8 +198,13 @@ void Main::TransitionTo( EState state ) {
           m_btnNext->setEnabled( true );
           m_btnCancel->setEnabled( true );
 
-          m_dtStart = Wt::WLocalDateTime::currentDateTime();
-          m_textDateTimeStart->setText( m_dtStart.toString() );
+          {
+            m_dtStart = std::chrono::system_clock::now();
+            time_point_t dtStartLocal = m_dtStart + std::chrono::duration<int,std::ratio<60> >( m_time_zone_offset );
+            Wt::WDateTime dtStart( dtStartLocal );
+            m_textDateTimeStart->setText( dtStart.toString( sDateTimeFormat ) );
+          }
+          
           m_textDateTimeEnd->setText( "" );
           m_textResult->setText( "started: " + m_textDateTimeStart->text() + " " + m_textDateTimeEnd->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
 
@@ -202,15 +227,20 @@ void Main::TransitionTo( EState state ) {
             m_btnComplete->setEnabled( false );
             m_btnNext->setEnabled( false );
             m_btnCancel->setEnabled( false );
-
-            m_dtEnd = Wt::WLocalDateTime::currentDateTime();
-            m_textDateTimeEnd->setText( m_dtEnd.toString() );
+            
+            {
+              m_dtEnd = std::chrono::system_clock::now();
+              time_point_t dtEndLocal = m_dtEnd + std::chrono::duration<int,std::ratio<60> >( m_time_zone_offset );
+              Wt::WDateTime dtEnd( dtEndLocal );
+              m_textDateTimeEnd->setText( dtEnd.toString( sDateTimeFormat ) );
+            }
 
             PersistTask();
             
             m_textResult->setText( "completed: " + m_textDateTimeStart->text() + " " + m_textDateTimeEnd->text() + " " + m_cbAccount->currentText() + " " +  m_lineBillingText->text() );
             m_lineBillingText->setText( "" );
             m_lineDetails->setText( "" );
+            m_textTimeInTask->setText( " " );
             
             // finalize with transition
             m_state = EState::Transit;
@@ -220,6 +250,7 @@ void Main::TransitionTo( EState state ) {
         case EState::Cancel:
           m_textDateTimeStart->setText( "" );
           m_textDateTimeEnd->setText( "" );
+          m_textTimeInTask->setText( " " );
           m_textResult->setText( "cancelled" );
           // skip any persistence
           // finalize with transition
@@ -252,21 +283,40 @@ void Main::TransitionTo( EState state ) {
 }
 
 void Main::HandleTimer() {  // called from two places, so not lambda material
-  Wt::WLocalDateTime now;
-  now = Wt::WLocalDateTime::currentServerDateTime();
-  m_textDateTimeCurrent->setText( now.toString( "yyyy-MM-dd HH:mm" ) );
+  
+  time_point_t utcNow = std::chrono::system_clock::now();
+  
+  time_point_t localNow = utcNow + std::chrono::duration<int,std::ratio<60> >( m_time_zone_offset );
+  Wt::WDateTime dtStart( localNow );
+  m_textDateTimeCurrent->setText( dtStart.toString( sDateTimeFormat ) );  // but this isn't local time  
+  
+  if ( EState::InTask == m_state ) {
+    auto dur = utcNow - m_dtStart;
+
+    typedef decltype(dur) dur_t;
+    
+    auto seconds = (dur.count() * dur_t::period::num) / dur_t::period::den;
+    
+    static const Wt::WTime time( 0, 0, 0 );
+    
+    m_textTimeInTask->setText( time.addSecs( seconds ).toString( sTimeFormat ) );
+  
+  }
 }
 
 void Main::PersistTask() {
   
   namespace dbo = Wt::Dbo;
   
+  Wt::WDateTime dtStart( m_dtStart );
+  Wt::WDateTime dtEnd( m_dtEnd );
+  
   dbo::Transaction transaction( m_session );
   
   std::unique_ptr<model::Task> task( new model::Task );
   task->m_sTaskType = m_cbAccount->currentText();
-  task->m_dtStart = m_dtStart.toUTC();
-  task->m_dtEnd = m_dtEnd.toUTC();
+  task->m_dtStart = dtStart;
+  task->m_dtEnd = dtEnd;
   task->m_sBillingText = m_lineBillingText->text();
   task->m_sTaskText = m_lineDetails->text();
   
