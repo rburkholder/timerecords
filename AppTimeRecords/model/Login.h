@@ -57,8 +57,8 @@ template<> struct dbo_traits<model::Login>: public dbo_default_traits {
   static const char* versionField() { return 0; }
 };
 
-}
-}
+} // namespace Wt
+} // namespace Dbo
 
 #endif /* LOGIN_H */
 

@@ -43,7 +43,6 @@ public:
   
 protected:
 private:
-private:
 
 };
 
@@ -56,7 +55,7 @@ namespace Wt {
 
     template<>
     struct dbo_traits<model::Task> : public dbo_default_traits {
-      static const char *surrogateIdField() {
+      static const char *surrogateIdField() { 
         return "id_task";
         }
       static const char *versionField() {
@@ -64,8 +63,8 @@ namespace Wt {
       }
     };
     
-  }
-}
+  } // namespace Dbo
+} // namespace WT
 
 #endif /* TASK_H */
 

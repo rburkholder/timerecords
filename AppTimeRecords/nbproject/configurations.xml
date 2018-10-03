@@ -9,13 +9,14 @@
       <itemPath>AppTimeRecords.h</itemPath>
       <itemPath>model/Company.h</itemPath>
       <itemPath>model/Email.h</itemPath>
+      <itemPath>model/KeyValue.h</itemPath>
       <itemPath>model/Login.h</itemPath>
       <itemPath>page/Main.h</itemPath>
       <itemPath>model/OptInKey.h</itemPath>
       <itemPath>Server.h</itemPath>
       <itemPath>model/Task.h</itemPath>
       <itemPath>model/Team.h</itemPath>
-      <itemPath>model/sqltraits/ptime.h</itemPath>
+      <itemPath>model/Version.h</itemPath>
       <itemPath>model/sqltraits/uuid.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -30,12 +31,14 @@
       <itemPath>AppTimeRecords.cpp</itemPath>
       <itemPath>model/Company.cpp</itemPath>
       <itemPath>model/Email.cpp</itemPath>
+      <itemPath>model/KeyValue.cpp</itemPath>
       <itemPath>model/Login.cpp</itemPath>
       <itemPath>page/Main.cpp</itemPath>
       <itemPath>model/OptInKey.cpp</itemPath>
       <itemPath>Server.cpp</itemPath>
       <itemPath>model/Task.cpp</itemPath>
       <itemPath>model/Team.cpp</itemPath>
+      <itemPath>model/Version.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -98,6 +101,10 @@
       </item>
       <item path="model/Email.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="model/KeyValue.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/KeyValue.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="model/Login.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Login.h" ex="false" tool="3" flavor2="0">
@@ -114,7 +121,9 @@
       </item>
       <item path="model/Team.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="model/sqltraits/ptime.h" ex="false" tool="3" flavor2="0">
+      <item path="model/Version.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Version.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -169,6 +178,10 @@
       </item>
       <item path="model/Email.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="model/KeyValue.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/KeyValue.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="model/Login.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Login.h" ex="false" tool="3" flavor2="0">
@@ -185,7 +198,9 @@
       </item>
       <item path="model/Team.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="model/sqltraits/ptime.h" ex="false" tool="3" flavor2="0">
+      <item path="model/Version.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Version.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
