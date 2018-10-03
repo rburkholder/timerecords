@@ -67,7 +67,5 @@ namespace Wt {
   }
 }
 
-
-
 #endif /* TASK_H */
 

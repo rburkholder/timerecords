@@ -4,11 +4,19 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <itemPath>model/Account.h</itemPath>
       <itemPath>AppManager.h</itemPath>
       <itemPath>AppTimeRecords.h</itemPath>
+      <itemPath>model/Company.h</itemPath>
+      <itemPath>model/Email.h</itemPath>
+      <itemPath>model/Login.h</itemPath>
       <itemPath>page/Main.h</itemPath>
+      <itemPath>model/OptInKey.h</itemPath>
       <itemPath>Server.h</itemPath>
       <itemPath>model/Task.h</itemPath>
+      <itemPath>model/Team.h</itemPath>
+      <itemPath>model/sqltraits/ptime.h</itemPath>
+      <itemPath>model/sqltraits/uuid.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -17,11 +25,17 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <itemPath>model/Account.cpp</itemPath>
       <itemPath>AppManager.cpp</itemPath>
       <itemPath>AppTimeRecords.cpp</itemPath>
+      <itemPath>model/Company.cpp</itemPath>
+      <itemPath>model/Email.cpp</itemPath>
+      <itemPath>model/Login.cpp</itemPath>
       <itemPath>page/Main.cpp</itemPath>
+      <itemPath>model/OptInKey.cpp</itemPath>
       <itemPath>Server.cpp</itemPath>
       <itemPath>model/Task.cpp</itemPath>
+      <itemPath>model/Team.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -72,9 +86,37 @@
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="model/Account.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Account.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Company.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Company.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Email.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Email.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Login.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Login.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/OptInKey.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/OptInKey.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="model/Task.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Task.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Team.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Team.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/sqltraits/ptime.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="page/Main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -115,9 +157,37 @@
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
+      <item path="model/Account.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Account.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Company.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Company.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Email.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Email.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Login.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Login.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/OptInKey.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/OptInKey.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="model/Task.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Task.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Team.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Team.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/sqltraits/ptime.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="page/Main.cpp" ex="false" tool="1" flavor2="0">
       </item>

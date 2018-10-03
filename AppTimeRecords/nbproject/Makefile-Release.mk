@@ -39,7 +39,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/AppTimeRecords.o \
 	${OBJECTDIR}/Server.o \
 	${OBJECTDIR}/main.o \
+	${OBJECTDIR}/model/Account.o \
+	${OBJECTDIR}/model/Company.o \
+	${OBJECTDIR}/model/Email.o \
+	${OBJECTDIR}/model/Login.o \
+	${OBJECTDIR}/model/OptInKey.o \
 	${OBJECTDIR}/model/Task.o \
+	${OBJECTDIR}/model/Team.o \
 	${OBJECTDIR}/page/Main.o
 
 
@@ -87,10 +93,40 @@ ${OBJECTDIR}/main.o: main.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
+${OBJECTDIR}/model/Account.o: model/Account.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Account.o model/Account.cpp
+
+${OBJECTDIR}/model/Company.o: model/Company.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Company.o model/Company.cpp
+
+${OBJECTDIR}/model/Email.o: model/Email.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Email.o model/Email.cpp
+
+${OBJECTDIR}/model/Login.o: model/Login.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Login.o model/Login.cpp
+
+${OBJECTDIR}/model/OptInKey.o: model/OptInKey.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/OptInKey.o model/OptInKey.cpp
+
 ${OBJECTDIR}/model/Task.o: model/Task.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Task.o model/Task.cpp
+
+${OBJECTDIR}/model/Team.o: model/Team.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Team.o model/Team.cpp
 
 ${OBJECTDIR}/page/Main.o: page/Main.cpp
 	${MKDIR} -p ${OBJECTDIR}/page
