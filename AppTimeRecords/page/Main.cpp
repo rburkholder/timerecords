@@ -28,7 +28,7 @@
 namespace {
   static const std::string sDateFormat( "yyyy-MM-dd" );
   static const std::string sTimeFormat( "HH:mm:ss" );
-  static const std::string sDateTimeFormat( sDateFormat + "" + sTimeFormat );
+  static const std::string sDateTimeFormat( sDateFormat + " " + sTimeFormat );
 }
 
 namespace page {
