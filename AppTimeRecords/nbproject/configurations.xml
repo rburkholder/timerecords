@@ -7,13 +7,13 @@
       <logicalFolder name="f1" displayName="model" projectFiles="true">
         <itemPath>model/Account.h</itemPath>
         <itemPath>model/Company.h</itemPath>
+        <itemPath>model/DbVersion.h</itemPath>
         <itemPath>model/Email.h</itemPath>
         <itemPath>model/KeyValue.h</itemPath>
         <itemPath>model/Login.h</itemPath>
         <itemPath>model/OptInKey.h</itemPath>
         <itemPath>model/Task.h</itemPath>
         <itemPath>model/Team.h</itemPath>
-        <itemPath>model/Version.h</itemPath>
         <itemPath>model/sqltraits/uuid.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="page" projectFiles="true">
@@ -33,13 +33,13 @@
       <logicalFolder name="f1" displayName="model" projectFiles="true">
         <itemPath>model/Account.cpp</itemPath>
         <itemPath>model/Company.cpp</itemPath>
+        <itemPath>model/DbVersion.cpp</itemPath>
         <itemPath>model/Email.cpp</itemPath>
         <itemPath>model/KeyValue.cpp</itemPath>
         <itemPath>model/Login.cpp</itemPath>
         <itemPath>model/OptInKey.cpp</itemPath>
         <itemPath>model/Task.cpp</itemPath>
         <itemPath>model/Team.cpp</itemPath>
-        <itemPath>model/Version.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="page" projectFiles="true">
         <itemPath>page/Main.cpp</itemPath>
@@ -105,6 +105,10 @@
       </item>
       <item path="model/Company.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="model/DbVersion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/DbVersion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="model/Email.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Email.h" ex="false" tool="3" flavor2="0">
@@ -128,10 +132,6 @@
       <item path="model/Team.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Team.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="model/Version.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="model/Version.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -182,6 +182,10 @@
       </item>
       <item path="model/Company.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="model/DbVersion.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/DbVersion.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="model/Email.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Email.h" ex="false" tool="3" flavor2="0">
@@ -205,10 +209,6 @@
       <item path="model/Team.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/Team.h" ex="false" tool="3" flavor2="0">
-      </item>
-      <item path="model/Version.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="model/Version.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>

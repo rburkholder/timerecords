@@ -41,13 +41,13 @@ OBJECTFILES= \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/model/Account.o \
 	${OBJECTDIR}/model/Company.o \
+	${OBJECTDIR}/model/DbVersion.o \
 	${OBJECTDIR}/model/Email.o \
 	${OBJECTDIR}/model/KeyValue.o \
 	${OBJECTDIR}/model/Login.o \
 	${OBJECTDIR}/model/OptInKey.o \
 	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/model/Team.o \
-	${OBJECTDIR}/model/Version.o \
 	${OBJECTDIR}/page/Main.o
 
 
@@ -105,6 +105,11 @@ ${OBJECTDIR}/model/Company.o: model/Company.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Company.o model/Company.cpp
 
+${OBJECTDIR}/model/DbVersion.o: model/DbVersion.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/DbVersion.o model/DbVersion.cpp
+
 ${OBJECTDIR}/model/Email.o: model/Email.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
@@ -134,11 +139,6 @@ ${OBJECTDIR}/model/Team.o: model/Team.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Team.o model/Team.cpp
-
-${OBJECTDIR}/model/Version.o: model/Version.cpp
-	${MKDIR} -p ${OBJECTDIR}/model
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Version.o model/Version.cpp
 
 ${OBJECTDIR}/page/Main.o: page/Main.cpp
 	${MKDIR} -p ${OBJECTDIR}/page
