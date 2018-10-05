@@ -146,7 +146,7 @@ void AppTimeRecords::ShowMainMenu( Wt::WContainerWidget* pcw ) {
   }
   */
 
-  pcw->addWidget( std::make_unique<page::Main>( m_session ) );
+  pcw->addWidget( std::make_unique<page::TimeRecord>( m_session ) );
   
 }
 

@@ -20,10 +20,10 @@ namespace page {
 
 namespace dbo = Wt::Dbo;
 
-class Main: public Wt::WContainerWidget {
+class TimeRecord: public Wt::WContainerWidget {
 public:
-  Main( dbo::Session& );
-  virtual ~Main( );
+  TimeRecord( dbo::Session& );
+  virtual ~TimeRecord( );
 private:
   
   int m_time_zone_offset;

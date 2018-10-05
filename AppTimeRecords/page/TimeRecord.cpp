@@ -25,7 +25,7 @@
 
 #include <Wt/Dbo/Session.h>
 
-#include "Main.h"
+#include "TimeRecord.h"
 
 namespace {
   static const std::string sDateFormat( "yyyy-MM-dd" );
@@ -35,7 +35,7 @@ namespace {
 
 namespace page {
 
-Main::Main( dbo::Session& session )
+TimeRecord::TimeRecord( dbo::Session& session )
 : Wt::WContainerWidget(  ), 
   m_state( EState::Init ), 
   m_session( session ),
@@ -168,7 +168,7 @@ Main::Main( dbo::Session& session )
   
   auto timer = addChild(std::make_unique<Wt::WTimer>());
   timer->setInterval( std::chrono::seconds( 1 ) );
-  timer->timeout().connect(this, &Main::HandleTimer );
+  timer->timeout().connect(this, &TimeRecord::HandleTimer );
   timer->start();
   
   TransitionTo( Free );
@@ -177,9 +177,9 @@ Main::Main( dbo::Session& session )
   HandleTimer();
 }
 
-Main::~Main( ) { }
+TimeRecord::~TimeRecord( ) { }
 
-void Main::TransitionTo( EState state ) {
+void TimeRecord::TransitionTo( EState state ) {
   switch ( m_state ) {
     case EState::Init:  // holding state for startup only
       switch ( state ) {
@@ -284,7 +284,7 @@ void Main::TransitionTo( EState state ) {
   }
 }
 
-void Main::HandleTimer() {  // called from two places, so not lambda material
+void TimeRecord::HandleTimer() {  // called from two places, so not lambda material
   
   time_point_t utcNow = std::chrono::system_clock::now();
   
@@ -306,7 +306,7 @@ void Main::HandleTimer() {  // called from two places, so not lambda material
   }
 }
 
-void Main::PersistTask() {
+void TimeRecord::PersistTask() {
   
   namespace dbo = Wt::Dbo;
   
