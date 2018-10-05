@@ -19,9 +19,11 @@
 #include <Wt/WLocalDateTime.h>
 #include <Wt/WHBoxLayout.h>
 #include <Wt/WVBoxLayout.h>
-#include <Wt/Dbo/Session.h>
 
+#include "../model/Account.h"
 #include "../model/Task.h"
+
+#include <Wt/Dbo/Session.h>
 
 #include "Main.h"
 

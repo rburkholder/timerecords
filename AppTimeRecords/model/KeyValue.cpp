@@ -11,7 +11,7 @@
 
 namespace model {
 
-namespace dbo = Wt::Dbo;
+//namespace dbo = Wt::Dbo;
 
 KeyValue::KeyValue( ) { }
 

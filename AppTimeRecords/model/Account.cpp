@@ -13,8 +13,7 @@
 
 namespace model {
 
-Account::Account( )
-{ 
+Account::Account( ) { 
   Init();
 }
 

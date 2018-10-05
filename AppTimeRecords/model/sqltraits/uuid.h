@@ -17,8 +17,8 @@
 #include <boost/uuid/string_generator.hpp>
 #include <boost/uuid/uuid_io.hpp>
 
-#include <Wt/Dbo/Dbo>
-#include <Wt/Dbo/WtSqlTraits>
+#include <Wt/Dbo/Dbo.h>
+#include <Wt/Dbo/WtSqlTraits.h>
 
 namespace Wt {
 namespace Dbo {

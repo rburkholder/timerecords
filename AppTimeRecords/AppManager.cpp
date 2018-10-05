@@ -7,7 +7,15 @@
  * Created on September 22, 2018, 11:52 AM
  */
 
+#include "model/Version.h"
+#include "model/KeyValue.h"
+#include "model/Company.h"
+#include "model/Account.h"
+#include "model/Email.h"
+#include "model/Login.h"
+#include "model/OptInKey.h"
 #include "model/Task.h"
+#include "model/Team.h"
 
 #include "AppTimeRecords.h"
 
@@ -54,13 +62,31 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
 
   // will need to perform some sort of version control at some point (version control table?)
   
+  session.mapClass<model::DbVersion>( "db_version" );
+  session.mapClass<model::KeyValue>( "key_value" );
+  session.mapClass<model::Account>( "account" );
+  session.mapClass<model::Company>( "company" );
+  session.mapClass<model::Email>( "email_address" );
+  session.mapClass<model::Login>( "login" );
+  session.mapClass<model::OptInKey>( "opt_in_key" );
   session.mapClass<model::Task>( "task" );
+  session.mapClass<model::Team>( "team" );
   
   try {
-    session.createTables();
+    std::string sTableCreationSql = session.tableCreationSql();
+    std::cerr << sTableCreationSql << std::endl;
+
+    try {
+      //session.dropTables();
+      session.createTables();
+    }
+    catch( Wt::Dbo::Exception& exception ) {
+      m_server.log( "info" ) << "createTables: " << exception.what();
+      bResult = false;
+    }
   }
-  catch ( Wt::Dbo::Exception& exception ) {
-    m_server.log( "info" ) << "createTables: " << exception.what();
+  catch( Wt::Dbo::Exception& exception ) {
+    m_server.log( "info" ) << "tableCreationSql: " << exception.what();
     bResult = false;
   }
 

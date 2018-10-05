@@ -12,25 +12,31 @@
 
 #include <boost/uuid/uuid.hpp>
 
-#include <Wt/Dbo/Dbo.h>
 #include <Wt/WDateTime.h>
+
+#include <Wt/Dbo/Dbo.h>
+#include <Wt/Dbo/WtSqlTraits.h>
 
 namespace model {
 
 namespace dbo = Wt::Dbo;
+
+class Login;
+
 class OptInKey {
 public:
   OptInKey( );
   virtual ~OptInKey( );
   
-  std::string sOptInKey;
-  boost::uuids::uuid id_login;
+  std::string sKeyOptIn;
   Wt::WDateTime dtExpiry;
+  
+  dbo::ptr<Login> login;
   
   template<class Action>
   void persist( Action& a ) {
-    dbo::id( a, sOptInKey, "key_optin" );
-    dbo::field( a, id_login, "id_login" ); // foreign key
+    dbo::id( a, sKeyOptIn, "key_opt_in" );
+    dbo::belongsTo( a, login, "id_login" );
     dbo::field( a, dtExpiry, "dt_expiry" );
   }
   
@@ -40,6 +46,20 @@ private:
 };
 
 }  // namespace model
+
+namespace Wt {
+namespace Dbo {
+
+template<> struct dbo_traits<model::OptInKey>: public dbo_default_traits {
+  //static const char* surrogateIdField() { return "key_opt_in"; }
+  typedef std::string IdType;
+  static IdType invalidId() { return std::string(); }
+  static const char* surrogateIdField() { return 0; }
+  static const char* versionField() { return 0; }
+};
+
+} // namespace Wt
+} // namespace Dbo
 
 #endif /* OPTINKEY_H */
 

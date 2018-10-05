@@ -13,7 +13,9 @@
 
 namespace model {
 
-Company::Company( ) { }
+Company::Company( ) { 
+  Init();
+}
 
 Company::~Company( ) { }
 

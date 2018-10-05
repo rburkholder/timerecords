@@ -11,8 +11,8 @@
 
 namespace model {
 
-Version::Version( ) { }
+DbVersion::DbVersion( ) { }
 
-Version::~Version( ) { }
+DbVersion::~DbVersion( ) { }
 
 }  // namespace model

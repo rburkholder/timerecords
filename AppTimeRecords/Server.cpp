@@ -7,6 +7,9 @@
  * Created on September 22, 2018, 12:30 PM
  */
 
+// 2018/10/03 todo: instantiate uuid generator, and external to other modules
+//    static boost::uuids::random_generator uuidGenerator;
+
 #include "Server.h"
 
 Server::Server( 

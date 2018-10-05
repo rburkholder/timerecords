@@ -18,6 +18,8 @@ namespace model {
 
 namespace dbo = Wt::Dbo;
 
+class Account;
+
 class Email {
 public:
   
@@ -25,13 +27,18 @@ public:
   virtual ~Email( );
   
   boost::uuids::uuid id_email;
-  std::string sEmail;
+  bool bPrimary;
+  std::string sEmailAddress;
   std::string sDescription;
+  
+  dbo::ptr<Account> account;
   
   template<class Action>
   void persist( Action& a ) {
-    dbo::id( a, id_email, "id_email" );
-    dbo::field( a, sEmail, "email" );
+    dbo::id( a, id_email, "id_email_address" );
+    dbo::belongsTo( a, account, "id_account" );
+    dbo::field( a, bPrimary, "is_primary" );
+    dbo::field( a, sEmailAddress, "email_address" );
     dbo::field( a, sDescription, "description" );
   }
 protected:

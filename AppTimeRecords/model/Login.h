@@ -18,6 +18,9 @@ namespace model {
 
 namespace dbo = Wt::Dbo;
 
+class Account;
+class OptInKey;
+
 class Login {
 public:
   
@@ -29,13 +32,17 @@ public:
   std::string sSalt;
   std::string sHashPassword;
   
+  dbo::ptr<Account> account;
+  dbo::collection< dbo::ptr<OptInKey> > OptInKeys;
+  
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_login, "id_login" );
+    dbo::belongsTo( a, account, "id_account" );
     dbo::field( a, sLogin, "login" );
     dbo::field( a, sSalt, "salt" );
     dbo::field( a, sHashPassword, "hash_password" );
-    
+    dbo::hasMany( a, OptInKeys, dbo::ManyToOne, "id_login" ); // really should only be one per login, previous should be deleted.
   }
   
 protected:

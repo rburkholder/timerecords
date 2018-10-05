@@ -18,6 +18,8 @@ namespace model {
 
 namespace dbo = Wt::Dbo;
 
+class Account;
+
 class Team {
 public:
   Team( );
@@ -26,10 +28,13 @@ public:
   boost::uuids::uuid id_team;
   std::string sName;
   
+  dbo::collection< dbo::ptr<Account> > accounts;
+  
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_team, "id_team" );
     dbo::field( a, sName, "name" );
+    dbo::hasMany( a, accounts, dbo::ManyToMany, "team_account" );
   }
   
 protected:
