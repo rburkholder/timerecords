@@ -24,8 +24,8 @@ namespace Dbo {
 template<> struct dbo_traits<model::Team>: public dbo_default_traits {
   typedef boost::uuids::uuid IdType;
   static IdType invalidId() { return boost::uuids::uuid(); }
-  static const char* surrogateIdField() { return 0; }
-  static const char* versionField() { return 0; }
+  static const char* surrogateIdField() { return nullptr; }
+  static const char* versionField() { return nullptr; }
 };
 
 } // namesapce Dbo

@@ -24,8 +24,8 @@ namespace Wt {
       //static const char *surrogateIdField() {  return "key"; }
       typedef std::string IdType;
       static IdType invalidId() { return std::string(); }
-      static const char *surrogateIdField() {  return 0; }
-      static const char *versionField() { return 0; }
+      static const char *surrogateIdField() {  return nullptr; }
+      static const char *versionField() { return nullptr; }
     };
     
   } // namespace Dbo

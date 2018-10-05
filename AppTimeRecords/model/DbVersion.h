@@ -26,7 +26,7 @@ namespace Wt {
     template<>
     struct dbo_traits<model::DbVersion> : public dbo_default_traits {
       static const char *surrogateIdField() { return "id_db_version"; }
-      static const char *versionField() { return 0; }
+      static const char *versionField() { return nullptr; }
     };
     
   } // namespace Dbo
