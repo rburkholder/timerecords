@@ -21,7 +21,7 @@
 
 #include "Server.h"
 
-#include "page/Main.h"
+#include "page/TimeRecord.h"
 
 class AppTimeRecords: public Wt::WApplication {
 public:

@@ -48,7 +48,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/model/OptInKey.o \
 	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/model/Team.o \
-	${OBJECTDIR}/page/Main.o
+	${OBJECTDIR}/page/TimeRecord.o
 
 
 # C Compiler Flags
@@ -148,10 +148,10 @@ ${OBJECTDIR}/model/Team.o: model/Team.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Team.o model/Team.cpp
 
-${OBJECTDIR}/page/Main.o: page/Main.cpp
+${OBJECTDIR}/page/TimeRecord.o: page/TimeRecord.cpp
 	${MKDIR} -p ${OBJECTDIR}/page
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/page/Main.o page/Main.cpp
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/page/TimeRecord.o page/TimeRecord.cpp
 
 # Subprojects
 .build-subprojects:

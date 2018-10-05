@@ -17,7 +17,7 @@
         <itemPath>model/sqltraits/uuid.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="page" projectFiles="true">
-        <itemPath>page/Main.h</itemPath>
+        <itemPath>page/TimeRecord.h</itemPath>
       </logicalFolder>
       <itemPath>AppManager.h</itemPath>
       <itemPath>AppTimeRecords.h</itemPath>
@@ -42,7 +42,7 @@
         <itemPath>model/Team.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="page" projectFiles="true">
-        <itemPath>page/Main.cpp</itemPath>
+        <itemPath>page/TimeRecord.cpp</itemPath>
       </logicalFolder>
       <itemPath>AppManager.cpp</itemPath>
       <itemPath>AppTimeRecords.cpp</itemPath>
@@ -135,9 +135,9 @@
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="page/Main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="page/TimeRecord.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="page/Main.h" ex="false" tool="3" flavor2="0">
+      <item path="page/TimeRecord.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
     <conf name="Release" type="1">
@@ -212,9 +212,9 @@
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="page/Main.cpp" ex="false" tool="1" flavor2="0">
+      <item path="page/TimeRecord.cpp" ex="false" tool="1" flavor2="0">
       </item>
-      <item path="page/Main.h" ex="false" tool="3" flavor2="0">
+      <item path="page/TimeRecord.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
