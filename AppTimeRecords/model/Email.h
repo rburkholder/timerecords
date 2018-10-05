@@ -15,6 +15,23 @@
 #include <Wt/Dbo/Dbo.h>
 
 namespace model {
+  class Email;
+}  // namespace model
+
+namespace Wt {
+namespace Dbo {
+
+template<> struct dbo_traits<model::Email>: public dbo_default_traits {
+  typedef boost::uuids::uuid IdType;
+  static IdType invalidId() { return boost::uuids::uuid(); }
+  static const char* surrogateIdField() { return 0; }
+  static const char* versionField() { return 0; }
+};
+
+} // namesapce Dbo
+} // namespace Wt
+
+namespace model {
 
 namespace dbo = Wt::Dbo;
 
@@ -49,19 +66,6 @@ private:
 };
 
 }  // namespace model
-
-namespace Wt {
-namespace Dbo {
-
-template<> struct dbo_traits<model::Email>: public dbo_default_traits {
-  typedef boost::uuids::uuid IdType;
-  static IdType invalidId() { return boost::uuids::uuid(); }
-  static const char* surrogateIdField() { return 0; }
-  static const char* versionField() { return 0; }
-};
-
-} // namesapce Dbo
-} // namespace Wt
 
 #endif /* EMAIL_H */
 

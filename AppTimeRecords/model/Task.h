@@ -20,6 +20,24 @@
 #include <Wt/Dbo/WtSqlTraits.h>
 
 namespace model {
+  class Task;
+}  // namespace model
+
+// https://www.webtoolkit.eu/wt/doc/tutorial/dbo.html#customizing
+
+namespace Wt {
+  namespace Dbo {
+
+    template<>
+    struct dbo_traits<model::Task> : public dbo_default_traits {
+      static const char *surrogateIdField() { return "id_task"; }
+      static const char *versionField() { return 0; }
+    };
+    
+  } // namespace Dbo
+} // namespace WT
+
+namespace model {
 
 namespace dbo = Wt::Dbo;
 
@@ -54,20 +72,6 @@ private:
 };
 
 } // namespace model
-
-// https://www.webtoolkit.eu/wt/doc/tutorial/dbo.html#customizing
-
-namespace Wt {
-  namespace Dbo {
-
-    template<>
-    struct dbo_traits<model::Task> : public dbo_default_traits {
-      static const char *surrogateIdField() { return "id_task"; }
-      static const char *versionField() { return 0; }
-    };
-    
-  } // namespace Dbo
-} // namespace WT
 
 #endif /* TASK_H */
 

@@ -18,6 +18,24 @@
 #include "sqltraits/uuid.h"
 
 namespace model {
+  class Account;
+}  // namespace model
+
+namespace Wt {
+namespace Dbo {
+
+template<> 
+struct dbo_traits<model::Account>: public dbo_default_traits {
+  typedef boost::uuids::uuid IdType;
+  static IdType invalidId() { return boost::uuids::uuid(); }
+  static const char* surrogateIdField() { return 0; }
+  static const char* versionField() { return 0; }
+};
+
+}
+}
+
+namespace model {
 
 namespace dbo = Wt::Dbo;
 
@@ -66,20 +84,6 @@ private:
 };
 
 } // namespace model
-
-namespace Wt {
-namespace Dbo {
-
-template<> 
-struct dbo_traits<model::Account>: public dbo_default_traits {
-  typedef boost::uuids::uuid IdType;
-  static IdType invalidId() { return boost::uuids::uuid(); }
-  static const char* surrogateIdField() { return 0; }
-  static const char* versionField() { return 0; }
-};
-
-}
-}
 
 #endif /* ACCOUNT_H */
 

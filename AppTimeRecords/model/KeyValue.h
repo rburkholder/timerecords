@@ -13,6 +13,25 @@
 #include <Wt/Dbo/Dbo.h>
 
 namespace model {
+  class KeyValue;
+}  // namespace model
+
+namespace Wt {
+  namespace Dbo {
+
+    template<>
+    struct dbo_traits<model::KeyValue> : public dbo_default_traits {
+      //static const char *surrogateIdField() {  return "key"; }
+      typedef std::string IdType;
+      static IdType invalidId() { return std::string(); }
+      static const char *surrogateIdField() {  return 0; }
+      static const char *versionField() { return 0; }
+    };
+    
+  } // namespace Dbo
+} // namespace Wt
+
+namespace model {
 
 namespace dbo = Wt::Dbo;
 
@@ -35,21 +54,6 @@ private:
 };
 
 } // namespace model
-
-namespace Wt {
-  namespace Dbo {
-
-    template<>
-    struct dbo_traits<model::KeyValue> : public dbo_default_traits {
-      //static const char *surrogateIdField() {  return "key"; }
-      typedef std::string IdType;
-      static IdType invalidId() { return std::string(); }
-      static const char *surrogateIdField() {  return 0; }
-      static const char *versionField() { return 0; }
-    };
-    
-  } // namespace Dbo
-} // namespace Wt
 
 #endif /* KEYVALUE_H */
 
