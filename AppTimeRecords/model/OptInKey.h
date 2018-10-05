@@ -36,7 +36,7 @@ public:
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, sKeyOptIn, "key_opt_in" );
-    dbo::belongsTo( a, login, "id_login" );
+    dbo::belongsTo( a, login, ">id_login" );
     dbo::field( a, dtExpiry, "dt_expiry" );
   }
   

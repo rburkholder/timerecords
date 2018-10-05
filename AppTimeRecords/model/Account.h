@@ -48,7 +48,7 @@ public:
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_account, "id_account" );
-    dbo::belongsTo( a, company, "id_company" );
+    dbo::belongsTo( a, company, ">id_company" );
     dbo::field( a, sFirstName, "name_first" );
     dbo::field( a, sLastName, "name_last" );
     dbo::field( a, dtCreation, "dt_creation" );

@@ -36,7 +36,7 @@ public:
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_email, "id_email_address" );
-    dbo::belongsTo( a, account, "id_account" );
+    dbo::belongsTo( a, account, ">id_account" );
     dbo::field( a, bPrimary, "is_primary" );
     dbo::field( a, sEmailAddress, "email_address" );
     dbo::field( a, sDescription, "description" );

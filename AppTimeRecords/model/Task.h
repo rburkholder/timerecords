@@ -40,7 +40,7 @@ public:
   
   template<class Action>
   void persist( Action& a ) {
-    dbo::belongsTo( a, m_account, "id_account" );
+    dbo::belongsTo( a, m_account, ">id_account" );
     dbo::field( a, m_sTaskType,    "task_type" );
     dbo::field( a, m_dtStart,      "dt_start" );
     dbo::field( a, m_dtEnd,        "dt_end" );

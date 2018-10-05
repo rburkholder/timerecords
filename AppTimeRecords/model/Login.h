@@ -38,7 +38,7 @@ public:
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_login, "id_login" );
-    dbo::belongsTo( a, account, "id_account" );
+    dbo::belongsTo( a, account, ">id_account" );
     dbo::field( a, sLogin, "login" );
     dbo::field( a, sSalt, "salt" );
     dbo::field( a, sHashPassword, "hash_password" );
