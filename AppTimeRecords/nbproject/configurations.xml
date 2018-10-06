@@ -21,6 +21,7 @@
       </logicalFolder>
       <itemPath>AppManager.h</itemPath>
       <itemPath>AppTimeRecords.h</itemPath>
+      <itemPath>page/Front.h</itemPath>
       <itemPath>Server.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -46,6 +47,7 @@
       </logicalFolder>
       <itemPath>AppManager.cpp</itemPath>
       <itemPath>AppTimeRecords.cpp</itemPath>
+      <itemPath>page/Front.cpp</itemPath>
       <itemPath>Server.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
@@ -135,6 +137,10 @@
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="page/Front.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="page/Front.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="page/TimeRecord.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="page/TimeRecord.h" ex="false" tool="3" flavor2="0">
@@ -211,6 +217,10 @@
       <item path="model/Team.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/sqltraits/uuid.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="page/Front.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="page/Front.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="page/TimeRecord.cpp" ex="false" tool="1" flavor2="0">
       </item>

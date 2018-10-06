@@ -48,6 +48,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/model/OptInKey.o \
 	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/model/Team.o \
+	${OBJECTDIR}/page/Front.o \
 	${OBJECTDIR}/page/TimeRecord.o
 
 
@@ -139,6 +140,11 @@ ${OBJECTDIR}/model/Team.o: model/Team.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Team.o model/Team.cpp
+
+${OBJECTDIR}/page/Front.o: page/Front.cpp
+	${MKDIR} -p ${OBJECTDIR}/page
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/page/Front.o page/Front.cpp
 
 ${OBJECTDIR}/page/TimeRecord.o: page/TimeRecord.cpp
 	${MKDIR} -p ${OBJECTDIR}/page
