@@ -28,6 +28,7 @@ private:
   
   Server m_server;
   
+  bool InitializeData( dbo::Session& );
   bool InitializeTables( dbo::FixedSqlConnectionPool& pool );
   
 };

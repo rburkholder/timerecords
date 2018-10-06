@@ -22,6 +22,7 @@ Account::~Account( ) { }
 void Account::Init() {
   static boost::uuids::random_generator uuidGenerator;
   id_account = uuidGenerator();
+  dtCreation = Wt::WDateTime::currentDateTime();
   }
 
 } // namespace model

@@ -50,6 +50,20 @@ AppManager::AppManager( int argc, char** argv, dbo::FixedSqlConnectionPool& pool
 
 AppManager::~AppManager( ) { }
 
+bool AppManager::InitializeData( dbo::Session& session ) {
+  dbo::Transaction transaction( session );
+  std::unique_ptr<model::Company> pCompany( new model::Company );
+  pCompany->sName = "_no_company_";
+  dbo::ptr<model::Company> pdboCompany = session.add( std::move( pCompany ) );
+  
+  std::unique_ptr<model::Account> pAccount( new model::Account );
+  pAccount->company = pdboCompany;
+  pAccount->sFirstName = "_unkown_";
+  pAccount->sLastName = "_unkown_";
+  dbo::ptr<model::Account> pdboAccount = session.add( std::move( pAccount ) );
+  return true;
+}
+
 bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   
   bool bResult( true );
@@ -73,12 +87,23 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   session.mapClass<model::Team>( "team" );
   
   try {
+    session.dropTables();
+  }
+  catch ( Wt::Dbo::Exception& exception ) {
+    m_server.log( "info" ) << "dropTables: " << exception.what();
+    bResult = false;
+  }
+  
+  
+  try {
     std::string sTableCreationSql = session.tableCreationSql();
     std::cerr << sTableCreationSql << std::endl;
 
     try {
       //session.dropTables();
       session.createTables();
+      
+      InitializeData( session );
     }
     catch( Wt::Dbo::Exception& exception ) {
       m_server.log( "info" ) << "createTables: " << exception.what();

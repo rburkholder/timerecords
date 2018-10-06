@@ -165,7 +165,7 @@ void AppTimeRecords::Home( Wt::WContainerWidget* pcw ) {
 
 void AppTimeRecords::TemplatePage(Wt::WContainerWidget* pcw, fTemplate_t f) {
   
-  std::string sTitle( "Time Records" );
+  static const std::string sTitle( "Time Records" );
   setTitle( sTitle );
   
   auto title = pcw->addWidget( std::make_unique<Wt::WText>( "Time Records" ) );
