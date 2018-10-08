@@ -35,24 +35,24 @@ namespace model {
 
 namespace dbo = Wt::Dbo;
 
-class AccountTask;
+class Company;
 
 class CompanyTaskType {
 public:
   CompanyTaskType( );
   virtual ~CompanyTaskType( );
 
-  boost::uuids::uuid idTaskType;
-  std::string sTaskType;
+  boost::uuids::uuid idType;
+  std::string sCode;
   std::string sDescription;
   
-  dbo::ptr<AccountTask> task;
+  dbo::ptr<Company> company;
   
   template<class Action>
   void persist( Action& a ) {
-    dbo::id( a, idTaskType, "id_task_type" );
-    dbo::belongsTo( a, task, ">id_task" );
-    dbo::field( a, sTaskType, "task_type" );
+    dbo::id( a, idType, "id_type" );
+    dbo::belongsTo( a, company, ">id_company" );
+    dbo::field( a, sCode, "code" );
     dbo::field( a, sDescription, "description" );
   }
   

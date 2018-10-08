@@ -316,7 +316,7 @@ void TimeRecord::PersistTask() {
   dbo::Transaction transaction( m_session );
   
   std::unique_ptr<model::Task> pTask( new model::Task );
-  pTask->m_sTaskType = m_cbAccount->currentText();
+//  pTask->m_sTaskType = m_cbAccount->currentText();
   pTask->m_dtStart = dtStart;
   pTask->m_dtEnd = dtEnd;
   pTask->m_sBillingText = m_lineBillingText->text();

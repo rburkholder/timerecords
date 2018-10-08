@@ -52,7 +52,7 @@ public:
   Task( );
   virtual ~Task( );
 
-  Wt::WString m_sTaskType;
+//  Wt::WString m_sTaskType;
   Wt::WDateTime m_dtStart;
   Wt::WDateTime m_dtEnd;
   Wt::WString m_sBillingText;
@@ -63,7 +63,7 @@ public:
   template<class Action>
   void persist( Action& a ) {
     dbo::belongsTo( a, m_account, ">id_account" );
-    dbo::field( a, m_sTaskType,    "task_type" );
+//    dbo::field( a, m_sTaskType,    "task_type" );
     dbo::field( a, m_dtStart,      "dt_start" );
     dbo::field( a, m_dtEnd,        "dt_end" );
     dbo::field( a, m_sBillingText, "billing_text" );

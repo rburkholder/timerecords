@@ -19,7 +19,7 @@ CompanyTaskType::~CompanyTaskType( ) { }
 
 void CompanyTaskType::Init() {
   static boost::uuids::random_generator uuidGenerator;
-  idTaskType = uuidGenerator();
+  idType = uuidGenerator();
 }
 
 } // namespace model
