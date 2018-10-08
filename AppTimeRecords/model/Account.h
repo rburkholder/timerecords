@@ -41,7 +41,7 @@ namespace dbo = Wt::Dbo;
 
 class Email;
 class Login;
-class Task;
+class AccountTask;
 class Team;
 class Company;
 
@@ -58,7 +58,7 @@ public:
   
   dbo::ptr<Company> company;
   
-  dbo::collection< dbo::ptr<Task> > tasks;
+  dbo::collection< dbo::ptr<AccountTask> > tasks;
   dbo::collection< dbo::ptr<Email> > email_addresses;
   dbo::collection< dbo::ptr<Login> > logins;
   dbo::collection< dbo::ptr<Team> > teams;

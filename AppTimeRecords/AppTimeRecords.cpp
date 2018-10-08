@@ -30,7 +30,7 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
   
   m_session.setConnectionPool( m_pServer->GetConnectionPool() );
   
-  m_session.mapClass<model::Task>( "task" );
+  m_session.mapClass<model::AccountTask>( "task" );
   
   useStyleSheet("style/tr.css");
   

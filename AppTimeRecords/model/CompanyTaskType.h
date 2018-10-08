@@ -35,7 +35,7 @@ namespace model {
 
 namespace dbo = Wt::Dbo;
 
-class Task;
+class AccountTask;
 
 class CompanyTaskType {
 public:
@@ -46,7 +46,7 @@ public:
   std::string sTaskType;
   std::string sDescription;
   
-  dbo::ptr<Task> task;
+  dbo::ptr<AccountTask> task;
   
   template<class Action>
   void persist( Action& a ) {
