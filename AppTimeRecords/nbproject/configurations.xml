@@ -17,11 +17,11 @@
         <itemPath>model/sqltraits/uuid.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="page" projectFiles="true">
+        <itemPath>page/Front.h</itemPath>
         <itemPath>page/TimeRecord.h</itemPath>
       </logicalFolder>
       <itemPath>AppManager.h</itemPath>
       <itemPath>AppTimeRecords.h</itemPath>
-      <itemPath>page/Front.h</itemPath>
       <itemPath>Server.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -43,11 +43,11 @@
         <itemPath>model/Team.cpp</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="page" projectFiles="true">
+        <itemPath>page/Front.cpp</itemPath>
         <itemPath>page/TimeRecord.cpp</itemPath>
       </logicalFolder>
       <itemPath>AppManager.cpp</itemPath>
       <itemPath>AppTimeRecords.cpp</itemPath>
-      <itemPath>page/Front.cpp</itemPath>
       <itemPath>Server.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
     </logicalFolder>
