@@ -40,14 +40,17 @@ OBJECTFILES= \
 	${OBJECTDIR}/Server.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/model/Account.o \
+	${OBJECTDIR}/model/AccountTask.o \
+	${OBJECTDIR}/model/AccountTaskType.o \
 	${OBJECTDIR}/model/Company.o \
+	${OBJECTDIR}/model/CompanyTaskType.o \
 	${OBJECTDIR}/model/DbVersion.o \
 	${OBJECTDIR}/model/Email.o \
 	${OBJECTDIR}/model/KeyValue.o \
 	${OBJECTDIR}/model/Login.o \
 	${OBJECTDIR}/model/OptInKey.o \
-	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/model/Team.o \
+	${OBJECTDIR}/model/TeamTaskType.o \
 	${OBJECTDIR}/page/Front.o \
 	${OBJECTDIR}/page/TimeRecord.o
 
@@ -109,10 +112,25 @@ ${OBJECTDIR}/model/Account.o: model/Account.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Account.o model/Account.cpp
 
+${OBJECTDIR}/model/AccountTask.o: model/AccountTask.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/AccountTask.o model/AccountTask.cpp
+
+${OBJECTDIR}/model/AccountTaskType.o: model/AccountTaskType.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/AccountTaskType.o model/AccountTaskType.cpp
+
 ${OBJECTDIR}/model/Company.o: model/Company.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Company.o model/Company.cpp
+
+${OBJECTDIR}/model/CompanyTaskType.o: model/CompanyTaskType.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/CompanyTaskType.o model/CompanyTaskType.cpp
 
 ${OBJECTDIR}/model/DbVersion.o: model/DbVersion.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
@@ -139,15 +157,15 @@ ${OBJECTDIR}/model/OptInKey.o: model/OptInKey.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/OptInKey.o model/OptInKey.cpp
 
-${OBJECTDIR}/model/Task.o: model/Task.cpp
-	${MKDIR} -p ${OBJECTDIR}/model
-	${RM} "$@.d"
-	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Task.o model/Task.cpp
-
 ${OBJECTDIR}/model/Team.o: model/Team.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Team.o model/Team.cpp
+
+${OBJECTDIR}/model/TeamTaskType.o: model/TeamTaskType.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/TeamTaskType.o model/TeamTaskType.cpp
 
 ${OBJECTDIR}/page/Front.o: page/Front.cpp
 	${MKDIR} -p ${OBJECTDIR}/page

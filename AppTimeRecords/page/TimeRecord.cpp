@@ -21,7 +21,7 @@
 #include <Wt/WVBoxLayout.h>
 
 #include "../model/Account.h"
-#include "../model/Task.h"
+#include "../model/AccountTask.h"
 
 #include <Wt/Dbo/Session.h>
 
@@ -315,14 +315,14 @@ void TimeRecord::PersistTask() {
   
   dbo::Transaction transaction( m_session );
   
-  std::unique_ptr<model::Task> task( new model::Task );
-  task->m_sTaskType = m_cbAccount->currentText();
-  task->m_dtStart = dtStart;
-  task->m_dtEnd = dtEnd;
-  task->m_sBillingText = m_lineBillingText->text();
-  task->m_sTaskText = m_lineDetails->text();
+  std::unique_ptr<model::Task> pTask( new model::Task );
+  pTask->m_sTaskType = m_cbAccount->currentText();
+  pTask->m_dtStart = dtStart;
+  pTask->m_dtEnd = dtEnd;
+  pTask->m_sBillingText = m_lineBillingText->text();
+  pTask->m_sTaskText = m_lineDetails->text();
   
-  dbo::ptr<model::Task> pdboTask = m_session.add( std::move( task ) );
+  dbo::ptr<model::Task> pdboTask = m_session.add( std::move( pTask ) );
   transaction.commit();
   
 }

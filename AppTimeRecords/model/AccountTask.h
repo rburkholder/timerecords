@@ -43,6 +43,10 @@ namespace dbo = Wt::Dbo;
 
 class Account;
 
+class AccountTaskType;
+class TeamTaskType;
+class CompanyTaskType;
+
 class Task {
 public:
   Task( );
