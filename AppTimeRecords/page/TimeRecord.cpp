@@ -315,14 +315,14 @@ void TimeRecord::PersistTask() {
   
   dbo::Transaction transaction( m_session );
   
-  std::unique_ptr<model::AccountTask> pTask( new model::AccountTask );
+  std::unique_ptr<model::Task> pTask( new model::Task );
   pTask->m_sTaskType = m_cbAccount->currentText();
   pTask->m_dtStart = dtStart;
   pTask->m_dtEnd = dtEnd;
   pTask->m_sBillingText = m_lineBillingText->text();
   pTask->m_sTaskText = m_lineDetails->text();
   
-  dbo::ptr<model::AccountTask> pdboTask = m_session.add( std::move( pTask ) );
+  dbo::ptr<model::Task> pdboTask = m_session.add( std::move( pTask ) );
   transaction.commit();
   
 }

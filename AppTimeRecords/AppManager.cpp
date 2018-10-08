@@ -83,7 +83,7 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   session.mapClass<model::Email>( "email_address" );
   session.mapClass<model::Login>( "login" );
   session.mapClass<model::OptInKey>( "opt_in_key" );
-  session.mapClass<model::AccountTask>( "acount_task" );
+  session.mapClass<model::Task>( "account_task" );
   session.mapClass<model::Team>( "team" );
   
   try {

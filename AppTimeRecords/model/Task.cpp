@@ -11,8 +11,8 @@
 
 namespace model {
 
-AccountTask::AccountTask( ) { }
+Task::Task( ) { }
 
-AccountTask::~AccountTask( ) { }
+Task::~Task( ) { }
 
 } // namespace model

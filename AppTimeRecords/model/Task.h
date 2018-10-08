@@ -20,7 +20,7 @@
 #include <Wt/Dbo/WtSqlTraits.h>
 
 namespace model {
-  class AccountTask;
+  class Task;
 }  // namespace model
 
 // https://www.webtoolkit.eu/wt/doc/tutorial/dbo.html#customizing
@@ -29,7 +29,7 @@ namespace Wt {
   namespace Dbo {
 
     template<>
-    struct dbo_traits<model::AccountTask> : public dbo_default_traits {
+    struct dbo_traits<model::Task> : public dbo_default_traits {
       static const char *surrogateIdField() { return "id_task"; }
       static const char *versionField() { return nullptr; }
     };
@@ -47,10 +47,10 @@ class AccountTaskType;
 class TeamTaskType;
 class CompanyTaskType;
 
-class AccountTask {
+class Task {
 public:
-  AccountTask( );
-  virtual ~AccountTask( );
+  Task( );
+  virtual ~Task( );
 
   Wt::WString m_sTaskType;
   Wt::WDateTime m_dtStart;
