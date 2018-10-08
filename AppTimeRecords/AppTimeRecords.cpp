@@ -14,7 +14,7 @@
 #include <Wt/WText.h>
 
 #include "model/Account.h"
-#include "model/AccountTask.h"
+#include "model/Task.h"
 
 #include <Wt/Dbo/Session.h>
 

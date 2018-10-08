@@ -14,7 +14,7 @@
 #include "model/Email.h"
 #include "model/Login.h"
 #include "model/OptInKey.h"
-#include "model/AccountTask.h"
+#include "model/Task.h"
 #include "model/Team.h"
 
 #include "AppTimeRecords.h"

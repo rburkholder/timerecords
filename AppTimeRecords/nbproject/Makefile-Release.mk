@@ -40,7 +40,6 @@ OBJECTFILES= \
 	${OBJECTDIR}/Server.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/model/Account.o \
-	${OBJECTDIR}/model/AccountTask.o \
 	${OBJECTDIR}/model/AccountTaskType.o \
 	${OBJECTDIR}/model/Company.o \
 	${OBJECTDIR}/model/CompanyTaskType.o \
@@ -49,6 +48,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/model/KeyValue.o \
 	${OBJECTDIR}/model/Login.o \
 	${OBJECTDIR}/model/OptInKey.o \
+	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/model/Team.o \
 	${OBJECTDIR}/model/TeamTaskType.o \
 	${OBJECTDIR}/page/Front.o \
@@ -104,11 +104,6 @@ ${OBJECTDIR}/model/Account.o: model/Account.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Account.o model/Account.cpp
 
-${OBJECTDIR}/model/AccountTask.o: model/AccountTask.cpp
-	${MKDIR} -p ${OBJECTDIR}/model
-	${RM} "$@.d"
-	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/AccountTask.o model/AccountTask.cpp
-
 ${OBJECTDIR}/model/AccountTaskType.o: model/AccountTaskType.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
@@ -148,6 +143,11 @@ ${OBJECTDIR}/model/OptInKey.o: model/OptInKey.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/OptInKey.o model/OptInKey.cpp
+
+${OBJECTDIR}/model/Task.o: model/Task.cpp
+	${MKDIR} -p ${OBJECTDIR}/model
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/Task.o model/Task.cpp
 
 ${OBJECTDIR}/model/Team.o: model/Team.cpp
 	${MKDIR} -p ${OBJECTDIR}/model

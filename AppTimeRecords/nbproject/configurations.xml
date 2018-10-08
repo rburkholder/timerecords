@@ -6,7 +6,6 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="model" projectFiles="true">
         <itemPath>model/Account.h</itemPath>
-        <itemPath>model/AccountTask.h</itemPath>
         <itemPath>model/AccountTaskType.h</itemPath>
         <itemPath>model/Company.h</itemPath>
         <itemPath>model/CompanyTaskType.h</itemPath>
@@ -15,6 +14,7 @@
         <itemPath>model/KeyValue.h</itemPath>
         <itemPath>model/Login.h</itemPath>
         <itemPath>model/OptInKey.h</itemPath>
+        <itemPath>model/Task.h</itemPath>
         <itemPath>model/Team.h</itemPath>
         <itemPath>model/TeamTaskType.h</itemPath>
         <itemPath>model/sqltraits/uuid.h</itemPath>
@@ -36,7 +36,6 @@
                    projectFiles="true">
       <logicalFolder name="f1" displayName="model" projectFiles="true">
         <itemPath>model/Account.cpp</itemPath>
-        <itemPath>model/AccountTask.cpp</itemPath>
         <itemPath>model/AccountTaskType.cpp</itemPath>
         <itemPath>model/Company.cpp</itemPath>
         <itemPath>model/CompanyTaskType.cpp</itemPath>
@@ -45,6 +44,7 @@
         <itemPath>model/KeyValue.cpp</itemPath>
         <itemPath>model/Login.cpp</itemPath>
         <itemPath>model/OptInKey.cpp</itemPath>
+        <itemPath>model/Task.cpp</itemPath>
         <itemPath>model/Team.cpp</itemPath>
         <itemPath>model/TeamTaskType.cpp</itemPath>
       </logicalFolder>
@@ -109,10 +109,6 @@
       </item>
       <item path="model/Account.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="model/AccountTask.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="model/AccountTask.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="model/AccountTaskType.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/AccountTaskType.h" ex="false" tool="3" flavor2="0">
@@ -144,6 +140,10 @@
       <item path="model/OptInKey.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/OptInKey.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Task.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Task.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/Team.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -202,10 +202,6 @@
       </item>
       <item path="model/Account.h" ex="false" tool="3" flavor2="0">
       </item>
-      <item path="model/AccountTask.cpp" ex="false" tool="1" flavor2="0">
-      </item>
-      <item path="model/AccountTask.h" ex="false" tool="3" flavor2="0">
-      </item>
       <item path="model/AccountTaskType.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/AccountTaskType.h" ex="false" tool="3" flavor2="0">
@@ -237,6 +233,10 @@
       <item path="model/OptInKey.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="model/OptInKey.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="model/Task.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="model/Task.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="model/Team.cpp" ex="false" tool="1" flavor2="0">
       </item>
