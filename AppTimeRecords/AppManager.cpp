@@ -53,13 +53,13 @@ AppManager::~AppManager( ) { }
 bool AppManager::InitializeData( dbo::Session& session ) {
   dbo::Transaction transaction( session );
   std::unique_ptr<model::Company> pCompany( new model::Company );
-  pCompany->sName = "_no_company_";
+  pCompany->sName = "_unassigned_";
   dbo::ptr<model::Company> pdboCompany = session.add( std::move( pCompany ) );
   
   std::unique_ptr<model::Account> pAccount( new model::Account );
   pAccount->company = pdboCompany;
-  pAccount->sFirstName = "_unkown_";
-  pAccount->sLastName = "_unkown_";
+  pAccount->sFirstName = "_unassigned_";
+  pAccount->sLastName = "_unassigned_";
   dbo::ptr<model::Account> pdboAccount = session.add( std::move( pAccount ) );
   return true;
 }

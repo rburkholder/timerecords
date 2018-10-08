@@ -1,5 +1,5 @@
 /* 
- * File:   email.cpp
+ * File:      model/email.cpp
  * Author:    raymond@burkholder.net
  * Copywrite: 2018 Raymond Burkholder
  * License:   GPL3

@@ -1,5 +1,5 @@
 /* 
- * File:   Team.cpp
+ * File:       model/Team.cpp
   * Author:    raymond@burkholder.net
  * Copywrite: 2018 Raymond Burkholder
  * License:   GPL3

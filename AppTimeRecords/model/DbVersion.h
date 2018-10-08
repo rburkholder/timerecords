@@ -1,5 +1,5 @@
 /* 
- * File:   Version.h
+ * File:   model/DbVersion.h
  * Author:    raymond@burkholder.net
  * Copywrite: 2018 Raymond Burkholder
  * License:   GPL3*
