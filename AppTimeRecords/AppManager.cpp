@@ -16,6 +16,9 @@
 #include "model/OptInKey.h"
 #include "model/Task.h"
 #include "model/Team.h"
+#include "model/AccountTaskType.h"
+#include "model/CompanyTaskType.h"
+#include "model/TeamTaskType.h"
 
 #include "AppTimeRecords.h"
 
@@ -85,6 +88,9 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   session.mapClass<model::OptInKey>( "opt_in_key" );
   session.mapClass<model::Task>( "task" );
   session.mapClass<model::Team>( "team" );
+  session.mapClass<model::TeamTaskType>( "team_task_type");
+  session.mapClass<model::CompanyTaskType>( "company_task_type" );
+  session.mapClass<model::AccountTaskType>( "account_task_type" );
   
   try {
     //session.dropTables();
