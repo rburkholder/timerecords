@@ -166,6 +166,16 @@ TimeRecord::TimeRecord( dbo::Session& session )
   Wt::WLocalDateTime dt = Wt::WLocalDateTime::currentDateTime();
   m_time_zone_offset = dt.timeZoneOffset();
   
+  {
+    dbo::Transaction transaction( m_session );
+    try {
+      m_account = m_session.find<model::Account>().where( "name_first=? and name_last=?" ).bind( "_unassigned_" ).bind( "_unassigned_" );
+    }
+    catch ( Wt::Dbo::Exception& exception ) {
+      std::cerr << exception.what() << std::endl;
+    }
+  }
+  
   auto timer = addChild(std::make_unique<Wt::WTimer>());
   timer->setInterval( std::chrono::seconds( 1 ) );
   timer->timeout().connect(this, &TimeRecord::HandleTimer );
@@ -316,7 +326,9 @@ void TimeRecord::PersistTask() {
   dbo::Transaction transaction( m_session );
   
   std::unique_ptr<model::Task> pTask( new model::Task );
-//  pTask->m_sTaskType = m_cbAccount->currentText();
+  pTask->m_sCode = m_cbAccount->currentText();
+  pTask->m_sCodeOrigin = "account";
+  pTask->m_account = m_account;
   pTask->m_dtStart = dtStart;
   pTask->m_dtEnd = dtEnd;
   pTask->m_sBillingText = m_lineBillingText->text();

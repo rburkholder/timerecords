@@ -20,11 +20,25 @@
 
 #include <Wt/Dbo/Session.h>
 
+//#include "model/DbVersion.h"
+//#include "model/KeyValue.h"
+#include "model/Company.h"
+#include "model/Account.h"
+#include "model/Email.h"
+#include "model/Login.h"
+#include "model/OptInKey.h"
+#include "model/Task.h"
+#include "model/Team.h"
+#include "model/AccountTaskType.h"
+#include "model/CompanyTaskType.h"
+#include "model/TeamTaskType.h"
+
 #include "AppTimeRecords.h"
 
 namespace model {
-class Task;
-}
+  class Account;
+  class Task;
+} // namespace model
 
 // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WApplication.html
 
@@ -35,8 +49,17 @@ AppTimeRecords::AppTimeRecords( const Wt::WEnvironment& env )
   m_pServer = dynamic_cast<Server*>( env.server() );
   
   m_session.setConnectionPool( m_pServer->GetConnectionPool() );
-  
+
+  m_session.mapClass<model::Account>( "account" );
+  m_session.mapClass<model::Company>( "company" );
+  m_session.mapClass<model::Email>( "email_address" );
+  m_session.mapClass<model::Login>( "login" );
+  m_session.mapClass<model::OptInKey>( "opt_in_key" );
   m_session.mapClass<model::Task>( "task" );
+  m_session.mapClass<model::Team>( "team" );
+  m_session.mapClass<model::TeamTaskType>( "team_task_type");
+  m_session.mapClass<model::CompanyTaskType>( "company_task_type" );
+  m_session.mapClass<model::AccountTaskType>( "account_task_type" );  
   
   useStyleSheet("style/tr.css");
   

@@ -16,6 +16,8 @@
 #include <Wt/WContainerWidget.h>
 #include <Wt/Dbo/Session.h>
 
+#include "../model/Account.h"
+
 namespace page {
 
 namespace dbo = Wt::Dbo;
@@ -29,6 +31,8 @@ private:
   int m_time_zone_offset;
   
   dbo::Session& m_session;
+  
+  dbo::ptr<model::Account> m_account;
   
   typedef std::chrono::time_point<std::chrono::system_clock> time_point_t;
   
