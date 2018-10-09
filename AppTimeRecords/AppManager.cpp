@@ -52,12 +52,12 @@ AppManager::~AppManager( ) { }
 
 bool AppManager::InitializeData( dbo::Session& session ) {
   dbo::Transaction transaction( session );
-  std::unique_ptr<model::Company> pCompany( new model::Company );
-  pCompany->sName = "_unassigned_";
-  dbo::ptr<model::Company> pdboCompany = session.add( std::move( pCompany ) );
+//  std::unique_ptr<model::Company> pCompany( new model::Company );
+//  pCompany->sName = "_unassigned_";
+//  dbo::ptr<model::Company> pdboCompany = session.add( std::move( pCompany ) );
   
   std::unique_ptr<model::Account> pAccount( new model::Account );
-  pAccount->company = pdboCompany;
+//  pAccount->company = pdboCompany;
   pAccount->sFirstName = "_unassigned_";
   pAccount->sLastName = "_unassigned_";
   dbo::ptr<model::Account> pdboAccount = session.add( std::move( pAccount ) );
@@ -83,11 +83,11 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   session.mapClass<model::Email>( "email_address" );
   session.mapClass<model::Login>( "login" );
   session.mapClass<model::OptInKey>( "opt_in_key" );
-  session.mapClass<model::Task>( "account_task" );
+  session.mapClass<model::Task>( "task" );
   session.mapClass<model::Team>( "team" );
   
   try {
-    session.dropTables();
+    //session.dropTables();
   }
   catch ( Wt::Dbo::Exception& exception ) {
     m_server.log( "info" ) << "dropTables: " << exception.what();

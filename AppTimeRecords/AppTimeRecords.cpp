@@ -13,12 +13,18 @@
 #include <Wt/WAnchor.h>
 #include <Wt/WText.h>
 
-#include "model/Account.h"
-#include "model/Task.h"
+//#include "model/Task.h"
+//#include "model/Account.h"
+//#include "model/Company.h"
+//#include "model/Team.h"
 
 #include <Wt/Dbo/Session.h>
 
 #include "AppTimeRecords.h"
+
+namespace model {
+class Task;
+}
 
 // https://www.webtoolkit.eu/wt/doc/reference/html/classWt_1_1WApplication.html
 

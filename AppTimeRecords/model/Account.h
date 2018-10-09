@@ -56,23 +56,22 @@ public:
   std::string sLastName;
   Wt::WDateTime dtCreation;
   
-  dbo::ptr<Company> company;
-  
   dbo::collection< dbo::ptr<Task> > tasks;
   dbo::collection< dbo::ptr<Email> > email_addresses;
   dbo::collection< dbo::ptr<Login> > logins;
   dbo::collection< dbo::ptr<Team> > teams;
+  dbo::collection< dbo::ptr<Company> > companies;
 
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_account, "id_account" );
-    dbo::belongsTo( a, company, ">id_company" );
     dbo::field( a, sFirstName, "name_first" );
     dbo::field( a, sLastName, "name_last" );
     dbo::field( a, dtCreation, "dt_creation" );
     dbo::hasMany( a, tasks, dbo::ManyToOne, "id_account" );
     dbo::hasMany( a, email_addresses, dbo::ManyToOne, "id_account" );
     dbo::hasMany( a, logins, dbo::ManyToOne, "id_account" );
+    dbo::hasMany( a, companies, dbo::ManyToMany, "company_account" );
     dbo::hasMany( a, teams, dbo::ManyToMany, "team_account" );
   }
 

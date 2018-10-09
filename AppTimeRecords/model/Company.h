@@ -38,6 +38,7 @@ namespace model {
 namespace dbo = Wt::Dbo;
 
 class Account;
+class Task;
 
 class Company {
 public:
@@ -48,12 +49,14 @@ public:
   std::string sName;
   
   dbo::collection< dbo::ptr<Account> > accounts;
+  dbo::collection< dbo::ptr<Task> > tasks;
   
   template<class Action>
   void persist( Action& a ) {
     dbo::id( a, id_company, "id_company" );
     dbo::field( a, sName, "name" );
-    dbo::hasMany( a, accounts, dbo::ManyToOne, "id_company" );
+    dbo::hasMany( a, accounts, dbo::ManyToMany, "company_account" );
+    dbo::hasMany( a, tasks, dbo::ManyToMany, "company_task" );
   }
   
 protected:
