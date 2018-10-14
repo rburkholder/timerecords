@@ -51,6 +51,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/model/Task.o \
 	${OBJECTDIR}/model/Team.o \
 	${OBJECTDIR}/model/TeamTaskType.o \
+	${OBJECTDIR}/page/EditTaskType.o \
 	${OBJECTDIR}/page/Front.o \
 	${OBJECTDIR}/page/TimeRecord.o
 
@@ -166,6 +167,11 @@ ${OBJECTDIR}/model/TeamTaskType.o: model/TeamTaskType.cpp
 	${MKDIR} -p ${OBJECTDIR}/model
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/model/TeamTaskType.o model/TeamTaskType.cpp
+
+${OBJECTDIR}/page/EditTaskType.o: page/EditTaskType.cpp
+	${MKDIR} -p ${OBJECTDIR}/page
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -std=c++14 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/page/EditTaskType.o page/EditTaskType.cpp
 
 ${OBJECTDIR}/page/Front.o: page/Front.cpp
 	${MKDIR} -p ${OBJECTDIR}/page

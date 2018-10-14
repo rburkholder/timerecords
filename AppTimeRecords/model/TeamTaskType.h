@@ -43,6 +43,7 @@ public:
   virtual ~TeamTaskType( );
 
   boost::uuids::uuid idType;
+  int ix; // Orders the codes
   std::string sCode;
   std::string sDescription;
   
@@ -52,6 +53,7 @@ public:
   void persist( Action& a ) {
     dbo::id( a, idType, "id_type" );
     dbo::belongsTo( a, team, ">id_team" );
+    dbo::field( a, ix, "order" );
     dbo::field( a, sCode, "code" );
     dbo::field( a, sDescription, "description" );
   }
