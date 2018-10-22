@@ -31,6 +31,7 @@
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
                    projectFiles="true">
+      <itemPath>../x64/web/style/tr.css</itemPath>
     </logicalFolder>
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
@@ -93,6 +94,8 @@
           </linkerLibItems>
         </linkerTool>
       </compileType>
+      <item path="../x64/web/style/tr.css" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="AppManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="AppManager.h" ex="false" tool="3" flavor2="0">
@@ -190,6 +193,8 @@
           <developmentMode>5</developmentMode>
         </asmTool>
       </compileType>
+      <item path="../x64/web/style/tr.css" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="AppManager.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="AppManager.h" ex="false" tool="3" flavor2="0">

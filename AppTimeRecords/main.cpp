@@ -17,8 +17,9 @@
 /*
  * Debian/Ubuntu:
  * sudo su - postgres
- * create role timerecords login password 'tr';
- * create database timerecords with owner timerecords;
+ * psql
+ * #create role timerecords login password 'tr';
+ * #create database timerecords with owner timerecords;
  */
 
 // http://www.webtoolkit.eu/wt/doc/reference/html/InstallationUnix.html
@@ -53,7 +54,6 @@ int main( int argc, char** argv ) {
 
     manager.Start();
   }
-  
 
   return 0;
 }

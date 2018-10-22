@@ -15,6 +15,7 @@
 
 #include <boost/signals2.hpp>
 
+#include <Wt/Dbo/Dbo.h>
 #include <Wt/WEnvironment.h>
 #include <Wt/WApplication.h>
 #include <Wt/Dbo/backend/Postgres.h>
@@ -22,6 +23,8 @@
 #include "Server.h"
 
 #include "page/TimeRecord.h"
+
+namespace dbo = Wt::Dbo;
 
 class AppTimeRecords: public Wt::WApplication {
 public:

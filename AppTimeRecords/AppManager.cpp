@@ -47,8 +47,8 @@ static std::unique_ptr<Wt::WApplication> CreateAppTimeRecords( const Wt::WEnviro
 AppManager::AppManager( int argc, char** argv, dbo::FixedSqlConnectionPool& pool ) 
 : m_server(pool, argv[0])
 { 
-    m_server.setServerConfiguration(argc, argv, WTHTTP_CONFIGURATION);
-    m_server.addEntryPoint( Wt::EntryPointType::Application, CreateAppTimeRecords);
+    m_server.setServerConfiguration( argc, argv, WTHTTP_CONFIGURATION );
+    m_server.addEntryPoint( Wt::EntryPointType::Application, CreateAppTimeRecords );
 }
 
 AppManager::~AppManager( ) { }

@@ -12,6 +12,7 @@
 
 #include <Wt/Dbo/Dbo.h>
 //#include <Wt/Dbo/WtSqlTraits.h>
+#include <Wt/WContainerWidget.h>
 
 namespace page {
 
@@ -23,20 +24,28 @@ public:
   
   typedef dbo::collection< dbo::ptr<TaskType> > TaskTypes;
   
-  EditTaskType( );
+  EditTaskType( Wt::WContainerWidget*, TaskTypes& );
   virtual ~EditTaskType( );
   
 protected:
 private:
 
+  void DrawPage( Wt::WContainerWidget* pContainer, TaskTypes& refTaskTypes );
+  
 };
 
 template<typename TaskType>
-EditTaskType<TaskType>::EditTaskType() {
+EditTaskType<TaskType>::EditTaskType( Wt::WContainerWidget* pContainer, TaskTypes& refTaskTypes ) {
+  DrawPage( pContainer, refTaskTypes );
 }
 
 template<typename TaskType>
 EditTaskType<TaskType>::~EditTaskType() {
+}
+
+template<typename TaskType>
+void EditTaskType<TaskType>::DrawPage( Wt::WContainerWidget* pContainer, TaskTypes& refTaskTypes ) {
+  
 }
 
 } // namespace page
