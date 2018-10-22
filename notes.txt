@@ -1,3 +1,166 @@
 2018/10/03
 https://www.printabletimecards.com/
 
+2018/10/13
+
+selector {
+  property: value;
+}
+
+<head>
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+
+pg 21 The heading 1 (h1), heading 2 (h2), paragraphs (p), list items (li), and divs (div) 
+are all examples of natural block level elements.   
+
+pg 21 Block level elements have two defining traits: they expand the full width
+available, and they force elements that come after them to appear on the next line, meaning
+they stack on top of each other.
+
+pg 22 Inline elements sit next to each other horizontally and they don't take up the full width available. 
+They only take up as much width as they need. 
+A few elements that are naturally inline elements are 
+the anchor (<a>), <span>, <i>, <b>, <strong>, and <em> tags.
+
+There's a display property that allows you to
+change a natural block level element to inline and vice versa.
+
+  display: block;
+  display: inline
+  display: none - makes the item totally invisible
+
+width works in block mode.
+
+turns span from inline to block mode, which will then fill page width:
+span {
+  background-color: green;
+  display: block;
+  margin-top: 10px;
+}
+
+pg 24 inline elements don't respond to width or margin-top or margin-bottom.
+
+
+2018/10/16
+
+ class, an ID, or an element attribute,
+
+writing CSS directly in an
+HTML element gives it the most weight and will overrule all embedded styles and all
+external styles that target the same element, unless the !important keyword is used
+
+order of execution:
+* External Style Sheet
+* Embedded Style Sheet
+* Inline Style Sheet
+
+pg 58
+classes carry more weight than an element when used as a selector:
+
+pg 61
+main difference between writing classes and IDs is we start 
+classes with a period and 
+IDs with a number sign or pound sign or a hashtag
+
+pg 62
+* an ID has more weight than a class, literally 10 times more weight.
+* an ID is unique, and therefore, it can only be used once per page
+
+Descendant selectors will allow you to target elements on a page based on their
+ancestor elements. This is often necessary because you only want to apply a margin or a
+new font based on the context of the element.
+
+pg 69, summary pg 126
+!important declaration as being worth 10,000 - pg 124
+inline styles as worth 1,000 - pg 120
+IDs have a point value of 100 points, 
+a class is worth 10 points, so .secondary-section is worth 10 points. A plain old element
+such as p or div is worth 1 point.
+'*' selector worth 0 points - pg 124
+
+/* worth 13 */
+.secondary-section div figure img {
+border: 10px solid #333;
+}
+/* worth 11, less weight */
+.secondary-section img {
+border: 10px solid blue;
+}
+
+pg 70
+* try and keep your point value as low as possible 
+* avoid longer descendant selectors with more than 3 levels
+* BEM stands for Block Element Modifier and is a naming convention for CSS. The idea is
+to use a specific naming convention to add a class to every element you are eventually
+going to style. http://getbem.com/
+
+pg 77 
+intro to floats and how to use colour to determine area of a 'block' of something
+
+pg 88
+we get three equal columns with a margin-left for each of them, except the first:
+.column:first-child { 
+  margin-left: 0;
+}
+
+pg 91
+when all the elements inside a parent element are floated: the container collapses, 
+floats are taken outside the normal flow, and the container has no height because of this.
+
+pg 131 - focus, hover are similar:
+.button:focus,
+.button:hover {
+  background-color:color: #fff;
+}
+
+pg 133 - enhance with a bit of a scale change at the same time
+.button:focus,
+.button:hover {
+  background-color: #333;
+  color: #fff;
+  transform: scale(1.1, 1.1);
+}
+
+pg 129 - slow down the transition
+.button {
+border: 2px solid #333;
+color: #333;
+padding: 10px 0;
+display: block;
+text-align: center;
+font-weight: bold;
+letter-spacing: 1.5px;
+font-family: Arial, Helvetica, sans-serif;
+transition: .25s all linear;
+}
+
+
+pg 167 =- The greater than sign between the elements ensures we are only targeting direct children.
+Let's also float those list items to the left, then refresh the browser:
+.primary-nav > li {
+float: left;
+}
+
+pg 180 n-child with even/odd semantics
+You can also use the keywords odd and even. So if I were to throw even or odd in there,
+you'll get the numbers two and four with those properties applied:
+.primary-nav > li:nth-child(even) > a {
+  background-color: deeppink;
+  color: #fff;
+}
+
+pg 183
+All elements, by default, have a static position.
+Static elements adhere to the normal flow, meaning block-level elements simply are stacked
+on top of each other as long as they're not floated. Changing position to absolute takes it
+out of the normal flow. Its block qualities disappear and other elements aren't affected by it
+at all. It can be thought of as something that exists on another plane or level. Once
+positioned absolutely, you can start using offset properties, such as top, right, bottom,
+and left.
+
+pg 318 icon fonts
+
+
+http://caniuse.com/
