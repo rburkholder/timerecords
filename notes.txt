@@ -164,3 +164,46 @@ pg 318 icon fonts
 
 
 http://caniuse.com/
+
+https://color.adobe.com/create/color-whee
+
+
+
+1430244739\ 2017\ Beginning\ CSS3\ \(Expert\'s\ Voice\ in\ Web\ Development\).pdf
+
+pg 75 
+
+.no-blur {
+text-shadow: 0.1em 0.1em rgba(0,0,0,0.4);
+}
+.blur {
+text-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.4);
+}
+.color-blur {
+text-shadow: 0.1em 0.1em 0.2em rgba(0,102,102,0.4);
+}
+
+page 80 webfonts and web locations
+
+In the standard box model, width and height refer to the dimensions of the content, not the element’s
+overall size. Padding and borders are added to the width and height, not included.
+
+
+pg 100 
+
+Feature
+ Padding
+Background
+ The content’s background stretches into
+padding.
+Border
+ Padding goes inside the border.
+Collapsing
+ Padding never collapses.
+Margins
+The background of the content’s parent
+element shows through margins.
+Margins go outside the border.
+Adjacent vertical margins collapse.
+
+pg 118 Good example for dialog box
