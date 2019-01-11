@@ -1,7 +1,7 @@
-/* 
+/*
  * File:      AppManager.cpp
  * Author:    raymond@burkholder.net
- * Copywrite: 2018 Raymond Burkholder
+ * copyright: 2018 Raymond Burkholder
  * License:   GPL3
  *
  * Created on September 22, 2018, 11:52 AM
@@ -44,9 +44,9 @@ static std::unique_ptr<Wt::WApplication> CreateAppTimeRecords( const Wt::WEnviro
   return app;
 }
 
-AppManager::AppManager( int argc, char** argv, dbo::FixedSqlConnectionPool& pool ) 
+AppManager::AppManager( int argc, char** argv, dbo::FixedSqlConnectionPool& pool )
 : m_server(pool, argv[0])
-{ 
+{
     m_server.setServerConfiguration( argc, argv, WTHTTP_CONFIGURATION );
     m_server.addEntryPoint( Wt::EntryPointType::Application, CreateAppTimeRecords );
 }
@@ -58,7 +58,7 @@ bool AppManager::InitializeData( dbo::Session& session ) {
 //  std::unique_ptr<model::Company> pCompany( new model::Company );
 //  pCompany->sName = "_unassigned_";
 //  dbo::ptr<model::Company> pdboCompany = session.add( std::move( pCompany ) );
-  
+
   std::unique_ptr<model::Account> pAccount( new model::Account );
 //  pAccount->company = pdboCompany;
   pAccount->sFirstName = "_unassigned_";
@@ -68,9 +68,9 @@ bool AppManager::InitializeData( dbo::Session& session ) {
 }
 
 bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
-  
+
   bool bResult( true );
-  
+
   namespace dbo = Wt::Dbo;
 
   dbo::Session session;
@@ -78,7 +78,7 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   session.setConnectionPool( pool );
 
   // will need to perform some sort of version control at some point (version control table?)
-  
+
   session.mapClass<model::DbVersion>( "db_version" );
   session.mapClass<model::KeyValue>( "key_value" );
   session.mapClass<model::Account>( "account" );
@@ -91,7 +91,7 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
   session.mapClass<model::TeamTaskType>( "team_task_type");
   session.mapClass<model::CompanyTaskType>( "company_task_type" );
   session.mapClass<model::AccountTaskType>( "account_task_type" );
-  
+
   try {
     //session.dropTables();
   }
@@ -99,8 +99,8 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
     m_server.log( "info" ) << "dropTables: " << exception.what();
     bResult = false;
   }
-  
-  
+
+
   try {
     std::string sTableCreationSql = session.tableCreationSql();
     std::cerr << sTableCreationSql << std::endl;
@@ -108,7 +108,7 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
     try {
       //session.dropTables();
       session.createTables();
-      
+
       InitializeData( session );
     }
     catch( Wt::Dbo::Exception& exception ) {
@@ -125,7 +125,7 @@ bool AppManager::InitializeTables( dbo::FixedSqlConnectionPool& pool ) {
 }
 
 void AppManager::Start() {
-  
+
   try {
 
     InitializeTables( m_server.GetConnectionPool() );
@@ -138,10 +138,10 @@ void AppManager::Start() {
       Wt::WServer::waitForShutdown();
       m_server.stop();
     }
-  } 
+  }
   catch (Wt::WServer::Exception& e) {
     std::cerr << e.what() << std::endl;
-  } 
+  }
   catch (std::exception &e) {
     std::cerr << "exception: " << e.what() << std::endl;
   }

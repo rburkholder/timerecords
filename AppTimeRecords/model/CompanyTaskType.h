@@ -1,7 +1,7 @@
 /* 
  * File:   CompanyTaskType.h
  * Author:    raymond@burkholder.net
- * Copywrite: 2018 Raymond Burkholder
+ * copyright: 2018 Raymond Burkholder
  * License:   GPL3
  *
  * Created on October 8, 2018, 12:58 PM

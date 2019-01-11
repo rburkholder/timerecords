@@ -1,7 +1,7 @@
 /* 
  * File:      model/Task.h
  * Author:    raymond@burkholder.net
- * Copywrite: 2018 Raymond Burkholder
+ * copyright: 2018 Raymond Burkholder
  * License:   GPL3
  * 
  * Created on September 24, 2018, 7:22 PM

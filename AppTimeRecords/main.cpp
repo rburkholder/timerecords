@@ -1,7 +1,8 @@
-/* 
+/*
  * File:      main.cpp
+ * Project:   AppTimeRecords
  * Author:    raymond@burkholder.net
- * Copywrite: 2018 Raymond Burkholder
+ * copyright: 2018 Raymond Burkholder
  * License:   GPL3
  *
  * Created on September 21, 2018, 6:25 PM
@@ -28,14 +29,14 @@
 // cp -r ../libs-build/wt/resources web/
 
 int main( int argc, char** argv ) {
-  
+
   namespace dbo = Wt::Dbo;
 
   std::unique_ptr<dbo::SqlConnection> pSqlConnection;
 
   std::string sConnection( "host=127.0.0.1 user=timerecords password=tr port=5432 dbname=timerecords" );
 
-  bool bOk( false );  
+  bool bOk( false );
   try {
     pSqlConnection = std::make_unique<dbo::backend::Postgres>(sConnection);
     bOk = true;
@@ -43,13 +44,13 @@ int main( int argc, char** argv ) {
   catch(...) {
     std::cout << "can not make connection to database" << std::endl;
   }
-  
+
   if ( bOk ) {
-    
+
     pSqlConnection->setProperty( "show-queries", "true" );
-    
+
     dbo::FixedSqlConnectionPool pool( std::move( pSqlConnection ), 4 );
-    
+
     AppManager manager( argc, argv, pool );
 
     manager.Start();

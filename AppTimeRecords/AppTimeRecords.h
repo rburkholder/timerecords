@@ -1,7 +1,7 @@
 /* 
  * File:      AppTimeRecords.h
  * Author:    raymond@burkholder.net
- * Copywrite: 2018 Raymond Burkholder
+ * copyright: 2018 Raymond Burkholder
  * License:   GPL3
  *
  * Created on September 22, 2018, 12:40 PM

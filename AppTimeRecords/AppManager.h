@@ -1,7 +1,7 @@
 /* 
  * File:      AppManager.h
  * Author:    raymond@burkholder.net
- * Copywrite: 2018 Raymond Burkholder
+ * copyright: 2018 Raymond Burkholder
  * License:   GPL3
  *
  * Created on September 22, 2018, 11:52 AM
