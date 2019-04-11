@@ -32,3 +32,4 @@
 *.app
 /AppTimeRecords/build/
 /AppTimeRecords/dist/
+/build/
