@@ -131,13 +131,18 @@ TimeRecord::TimeRecord( dbo::Session& session )
   m_cbAccount = layoutLeft->addWidget( std::make_unique<Wt::WComboBox>() );
   m_cbAccount->setMargin(10,  Wt::Side::Left |  Wt::Side::Right);
   m_cbAccount->addItem( "cust1");
+  m_cbAccount->addItem( "cust2");
+  m_cbAccount->addItem( "project1");
+  m_cbAccount->addItem( "project2");
+  m_cbAccount->addItem( "project3");
   m_cbAccount->addItem( "break" );
   m_cbAccount->addItem( "email" );
-  m_cbAccount->addItem( "movies" );
   m_cbAccount->addItem( "tradeframe" );
   m_cbAccount->addItem( "timerecords" );
+  m_cbAccount->setStyleClass( "classBlock" );
 
   m_textTimeInTask = layoutLeft->addWidget( std::make_unique<Wt::WText>( " " ) );
+  m_textTimeInTask->setStyleClass( "classBlock classCenter" );
 
   //auto fieldsLeft = hl->addWidget( std::make_unique<Wt::WContainerWidget>() );
 

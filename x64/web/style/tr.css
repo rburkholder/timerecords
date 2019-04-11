@@ -17,6 +17,14 @@ body {
   float: top
 }
 
+.classBlock {
+  display: block;
+}
+
+.classCenter {
+  text-align:center;
+}
+
 // display: inline;   to get li stuff in a row  
 // display: inline-block; to allow padding, border, margin
 
