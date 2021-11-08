@@ -19,7 +19,7 @@ set(BOOST_USE_STATIC_RUNTIME OFF)
 #set(Boost_DETAILED_FAILURE_MSG ON)
 set(BOOST_INCLUDEDIR "/usr/local/include/boost")
 
-find_package(Boost 1.69.0 REQUIRED COMPONENTS system log log_setup)
+find_package(Boost 1.77.0 REQUIRED COMPONENTS system log log_setup)
 
 #message("boost lib: ${Boost_LIBRARIES}")
 
@@ -45,7 +45,7 @@ set(
     model/Team.h
     model/TeamTaskType.h
   )
-  
+
 set(
   file_cpp
     AppManager.cpp
@@ -68,37 +68,37 @@ set(
     model/Team.cpp
     model/TeamTaskType.cpp
   )
-  
-add_executable( 
+
+add_executable(
   ${PROJECT_NAME}
     ${file_h}
     ${file_cpp}
   )
-  
+
 target_compile_definitions(${PROJECT_NAME} PUBLIC BOOST_LOG_DYN_LINK )
 
 #target_include_directories(
-#  ${PROJECT_NAME} PUBLIC 
-#    ".." 
+#  ${PROJECT_NAME} PUBLIC
+#    ".."
 #  )
 
 target_link_directories(
-  ${PROJECT_NAME} PUBLIC 
+  ${PROJECT_NAME} PUBLIC
     /usr/local/lib
   )
-  
+
 target_link_libraries(
   ${PROJECT_NAME}
-      wt 
-      wthttp 
+      wt
+      wthttp
       wtdbo
       wtdbopostgres
       pthread
       ${Boost_LIBRARIES}
-  )  
-  
+  )
+
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-  
+
 # https://cmake.org/cmake/help/v3.4/manual/cmake-properties.7.html#target-properties
 # https://stackoverflow.com/questions/tagged/cmake?sort=votes&pagesize=50
 # https://github.com/Kitware/CMake/blob/master/Modules/FindBoost.cmake
@@ -107,7 +107,7 @@ install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 #target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
 #add_definitions(${Boost_LIB_DIAGNOSTIC_DEFINITIONS})
 #target_include_directories(${PROJECT_NAME} PUBLIC ".." ${Boost_INCLUDE_DIR})
-#include_directories(".." ${Boost_INCLUDE_DIR})  
+#include_directories(".." ${Boost_INCLUDE_DIR})
 #rm add_link_options( "--trace" )
 #target_link_options( ${PROJECT_NAME} PUBLIC "--verbose" "--trace" "--stats")
 #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --verbose --trace --stats")
