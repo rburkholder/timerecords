@@ -8,6 +8,9 @@
  * Created on September 21, 2018, 6:25 PM
  */
 
+// in terminal, in build:
+//    cmake --build . --target clean
+
 #include <iostream>
 
 #include <Wt/Dbo/FixedSqlConnectionPool.h>
