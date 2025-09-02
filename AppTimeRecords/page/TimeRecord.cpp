@@ -131,8 +131,6 @@ TimeRecord::TimeRecord( dbo::Session& session )
   m_cbAccount = layoutLeft->addWidget( std::make_unique<Wt::WComboBox>() );
   m_cbAccount->setMargin(10, Wt::Side::Left | Wt::Side::Right);
   m_cbAccount->addItem( "ross");
-  m_cbAccount->addItem( "yenom-fixed");
-  m_cbAccount->addItem( "yenom-hourly");
   m_cbAccount->addItem( "tradeframe" );
   m_cbAccount->addItem( "email" );
   m_cbAccount->addItem( "break" );
@@ -142,6 +140,9 @@ TimeRecord::TimeRecord( dbo::Session& session )
   m_cbAccount->addItem( "project2");
   m_cbAccount->addItem( "project3");
   m_cbAccount->addItem( "timerecords" );
+  m_cbAccount->addItem( "gdms");
+  m_cbAccount->addItem( "yenom-fixed");
+  m_cbAccount->addItem( "yenom-hourly");
   m_cbAccount->setStyleClass( "classBlock" );
 
   m_textTimeInTask = layoutLeft->addWidget( std::make_unique<Wt::WText>( " " ) );
