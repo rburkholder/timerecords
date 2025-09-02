@@ -9,13 +9,13 @@ Time Sheet Records
 
 * operation:
   * construct x64/timerecords.cfg with lines like:
-
-    account=cust1
-    account=cust2
-    account=project1
-    account=project2
-    acount=break
-
+```
+account=cust1
+account=cust2
+account=project1
+account=project2
+acount=break
+```
   * start application
   * connect to localhost:8082
 
