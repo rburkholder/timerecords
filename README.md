@@ -14,7 +14,7 @@ account=cust1
 account=cust2
 account=project1
 account=project2
-acount=break
+account=break
 ```
   * start application
   * connect to localhost:8082
