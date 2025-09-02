@@ -22,10 +22,9 @@ account=break
   * start application
   * connect to http://localhost:8082
 
-* for summaries in sqlite3:
-  * sqlite3 x64/timerecords.db
-
+* for summaries in sqlite3 (time differences are minutes and fractions of a minute):
 ```
+$ sqlite3 x64/timerecords.db
 sqlite> select code,dt_start, dt_end,(julianday(dt_end) - julianday(dt_start))*24*60 as duration, billing_text from task where code='timerecords' and dt_start > '2025-09-01 00:00:00' order by dt_start;
 timerecords|2025-09-02T22:40:57.273|2025-09-02T22:41:35.631|0.63929982483387|updated to use config file
 timerecords|2025-09-02T22:51:50.341|2025-09-02T22:52:45.333|0.916533619165421|adding to readme file
