@@ -1,0 +1,29 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "(gdb) TimeRecords",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/AppTimeRecords/AppTimeRecords",
+      "args": [ "--docroot=web\\;/favicon.ico,/resources,/style,/image", "--http-address=0.0.0.0", "--http-port=8082", "--config=etc/wt_config.xml" ],
+      "argsExpansion": "none",
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}/x64",
+      "environment": [],
+      "console": "internalConsole",
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
