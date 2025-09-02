@@ -25,12 +25,14 @@
 
 #include <Wt/Dbo/Session.h>
 
+#include "../Config.hpp"
 #include "TimeRecord.h"
 
 namespace {
-  static const std::string sDateFormat( "yyyy-MM-dd" );
-  static const std::string sTimeFormat( "HH:mm:ss" );
-  static const std::string sDateTimeFormat( sDateFormat + " " + sTimeFormat );
+  static const std::string c_sDateFormat( "yyyy-MM-dd" );
+  static const std::string c_sTimeFormat( "HH:mm:ss" );
+  static const std::string c_sDateTimeFormat( c_sDateFormat + " " + c_sTimeFormat );
+  static const std::string c_sNameConfigFile( "timerecords.cfg" );
 }
 
 namespace page {
@@ -130,20 +132,25 @@ TimeRecord::TimeRecord( dbo::Session& session )
 
   m_cbAccount = layoutLeft->addWidget( std::make_unique<Wt::WComboBox>() );
   m_cbAccount->setMargin(10, Wt::Side::Left | Wt::Side::Right);
-  m_cbAccount->addItem( "ross");
-  m_cbAccount->addItem( "tradeframe" );
-  m_cbAccount->addItem( "email" );
-  m_cbAccount->addItem( "break" );
-  m_cbAccount->addItem( "cust1");
-  m_cbAccount->addItem( "cust2");
-  m_cbAccount->addItem( "project1");
-  m_cbAccount->addItem( "project2");
-  m_cbAccount->addItem( "project3");
-  m_cbAccount->addItem( "timerecords" );
-  m_cbAccount->addItem( "gdms");
-  m_cbAccount->addItem( "yenom-fixed");
-  m_cbAccount->addItem( "yenom-hourly");
   m_cbAccount->setStyleClass( "classBlock" );
+
+  // todo:  move config file loading to application startup
+  config::Choices choices;
+  if ( config::Load( c_sNameConfigFile, choices ) ) {
+    for ( const auto& sAccount: choices.m_vAccount ) {
+      m_cbAccount->addItem( sAccount );
+    }
+  }
+  else { // load defaults
+    m_cbAccount->addItem( "email" );
+    m_cbAccount->addItem( "break" );
+    m_cbAccount->addItem( "cust1");
+    m_cbAccount->addItem( "cust2");
+    m_cbAccount->addItem( "project1");
+    m_cbAccount->addItem( "project2");
+    m_cbAccount->addItem( "project3");
+    m_cbAccount->addItem( "timerecords" );
+  }
 
   m_textTimeInTask = layoutLeft->addWidget( std::make_unique<Wt::WText>( " " ) );
   m_textTimeInTask->setStyleClass( "classBlock classCenter" );
@@ -223,7 +230,7 @@ void TimeRecord::TransitionTo( EState state ) {
             m_dtStart = std::chrono::system_clock::now();
             time_point_t dtStartLocal = m_dtStart + std::chrono::duration<int,std::ratio<60> >( m_time_zone_offset );
             Wt::WDateTime dtStart( dtStartLocal );
-            m_textDateTimeStart->setText( dtStart.toString( sDateTimeFormat ) );
+            m_textDateTimeStart->setText( dtStart.toString( c_sDateTimeFormat ) );
           }
 
           m_textDateTimeEnd->setText( "" );
@@ -253,7 +260,7 @@ void TimeRecord::TransitionTo( EState state ) {
               m_dtEnd = std::chrono::system_clock::now();
               time_point_t dtEndLocal = m_dtEnd + std::chrono::duration<int,std::ratio<60> >( m_time_zone_offset );
               Wt::WDateTime dtEnd( dtEndLocal );
-              m_textDateTimeEnd->setText( dtEnd.toString( sDateTimeFormat ) );
+              m_textDateTimeEnd->setText( dtEnd.toString( c_sDateTimeFormat ) );
             }
 
             PersistTask();
@@ -309,7 +316,7 @@ void TimeRecord::HandleTimer() {  // called from two places, so not lambda mater
 
   time_point_t localNow = utcNow + std::chrono::duration<int,std::ratio<60> >( m_time_zone_offset );
   Wt::WDateTime dtStart( localNow );
-  m_textDateTimeCurrent->setText( dtStart.toString( sDateTimeFormat ) );  // but this isn't local time
+  m_textDateTimeCurrent->setText( dtStart.toString( c_sDateTimeFormat ) );  // but this isn't local time
 
   if ( EState::InTask == m_state ) {
     auto dur = utcNow - m_dtStart;
@@ -320,7 +327,7 @@ void TimeRecord::HandleTimer() {  // called from two places, so not lambda mater
 
     static const Wt::WTime time( 0, 0, 0 );
 
-    m_textTimeInTask->setText( time.addSecs( seconds ).toString( sTimeFormat ) );
+    m_textTimeInTask->setText( time.addSecs( seconds ).toString( c_sTimeFormat ) );
 
   }
 }

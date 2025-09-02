@@ -19,7 +19,7 @@ set(BOOST_USE_STATIC_RUNTIME OFF)
 #set(Boost_DETAILED_FAILURE_MSG ON)
 set(BOOST_INCLUDEDIR "/usr/local/include/boost")
 
-find_package(Boost 1.81.0 REQUIRED COMPONENTS system log log_setup)
+find_package(Boost 1.81.0 REQUIRED COMPONENTS system log log_setup program_options)
 
 #message("boost lib: ${Boost_LIBRARIES}")
 
@@ -27,6 +27,7 @@ set(
   file_h
     AppManager.h
     AppTimeRecords.h
+    Config.hpp
     Server.h
     page/EditTaskType.h
     page/Front.h
@@ -50,6 +51,7 @@ set(
   file_cpp
     AppManager.cpp
     AppTimeRecords.cpp
+    Config.cpp
     Server.cpp
     main.cpp
     page/EditTaskType.cpp
