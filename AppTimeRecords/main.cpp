@@ -13,8 +13,9 @@
 
 #include <iostream>
 
+#include <Wt/Dbo/backend/Sqlite3.h>
+//#include <Wt/Dbo/backend/Postgres.h>
 #include <Wt/Dbo/FixedSqlConnectionPool.h>
-#include <Wt/Dbo/backend/Postgres.h>
 
 #include "AppManager.h"
 
@@ -41,11 +42,12 @@ int main( int argc, char** argv ) {
 
   std::unique_ptr<dbo::SqlConnection> pSqlConnection;
 
-  std::string sConnection( "host=127.0.0.1 user=timerecords password=tr port=5432 dbname=timerecords" );
+  //std::string sConnection( "host=127.0.0.1 user=timerecords password=tr port=5432 dbname=timerecords" );
 
   bool bOk( false );
   try {
-    pSqlConnection = std::make_unique<dbo::backend::Postgres>(sConnection);
+    //pSqlConnection = std::make_unique<dbo::backend::Postgres>(sConnection);
+    pSqlConnection = std::make_unique<dbo::backend::Sqlite3>( "timerecords.db");
     bOk = true;
   }
   catch(...) {
