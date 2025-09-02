@@ -1,11 +1,14 @@
 # timerecords
-Time Sheet Records
+
+Simple Web Application to collect timesheet records, record in sqlite3 (can be switched to postgresql)
+
+![Screen Capture](pictures/Screenshot_20250902_171750.png)
 
 * uses sqlite3 for using a local database
 
 * installation:
   * requires wt to be built and the resources directory be copied or linked in x64/web/
-  * requires boost 
+  * requires boost
 
 * operation:
   * construct x64/timerecords.cfg with lines like:
@@ -17,7 +20,7 @@ account=project2
 account=break
 ```
   * start application
-  * connect to localhost:8082
+  * connect to http://localhost:8082
 
 * for summaries in sqlite3:
   * sqlite3 x64/timerecords.db
